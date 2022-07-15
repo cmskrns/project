@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.jafa.mapper.BoardMapper">
+	
+		<sql id="search">
+			<where>
+				<trim prefixOverrides="OR">
+					<foreach collection="cri.typeCollection">
+						<trim prefix="OR">
+							<choose>
+								<when test="cri.type=='R'.toString()">
+									rtName like concat('%',#{cri.keyword},'%')
+								</when>
+								<when test="cri.type=='A'.toString()">
+									addr like concat('%',#{cri.keyword},'%')
+								</when>
+							</choose>
+						</trim>
+					</foreach>
+				</trim>
+				AND category=#{cri.category}
+			</where>
+		</sql>
+	
+  	<select id="getList" resultType="com.jafa.model.Board">
+	    select * from project_tbl 
+	    <include refid="search"/>
+	    order by fno desc limit #{cri.pageStart},#{cri.perPageNum};
+  	</select>
+  	
+  	<select id="get" resultMap="boardResult">
+  		select * from project_tbl where fno = #{fno};
+  	</select>
+  	
+  	<resultMap type="com.jafa.model.Board" id="boardResult">
+  		<result property="fno" column="fno"/>
+  		<result property="category" column="category"/>
+  		<result property="writer" column="writer"/>
+  		<result property="rtName" column="rtName"/>
+  		<result property="addr" column="addr"/>
+  		<result property="description" column="description"/>
+  		<result property="avgPrice" column="avgPrice"/>
+  		<result property="avgDelivery" column="avgDelivery"/>
+  		<result property="regDate" column="regDate"/>
+  		<result property="updateDate" column="updateDate"/>
+  		<result property="replyCnt" column="replyCnt"/>
+  		<collection property="replyList" column="fno" javaType="java.util.ArrayList"
+  		ofType="com.jafa.model.Reply" select="getReplyList"/>
+  	</resultMap>
+  	
+  	<select id="getReplyList" resultType="com.jafa.model.Reply">
+  		select * from project_tbl where fno = #{fno}
+  	</select>
+  	
+  	<select id="totalCount" resultType="int">
+  		select count(*) from project_tbl <include refid="search"/>
+  	</select>
+  	
+  	<insert id="insert">
+  		insert into project_tbl(category,writer,rtName,addr,description,avgPrice,avgDelivery) value (#{category},#{writer},#{rtName},#{addr},#{description},#{avgPrice},#{avgDelivery});
+  		<selectKey keyProperty="fno" order="AFTER" resultType="long">
+  			select last_insert_id()
+  		</selectKey>
+  	</insert>
+  	
+  	<update id="update">
+  		update project_tbl set
+  		 category = #{category},
+  		 writer = #{writer},
+  		 rtName = #{rtName},
+  		 addr=#{addr},
+  		 description=#{description},
+  		 avgPrice=#{avgPrice},
+  		 avgDelivery=#{avgDelivery},
+  		 updateDate = now()
+  		 where fno = #{fno}
+  	</update>
+  	
+  	<delete id="delete">
+  		delete from project_tbl where fno =#{fno}
+  	</delete>
+	</mapper>

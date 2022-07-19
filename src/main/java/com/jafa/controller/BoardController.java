@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jafa.exception.NotFoundBoardException;
 import com.jafa.mapper.BoardMapper;
 import com.jafa.model.Board;
 import com.jafa.model.Criteria;
@@ -40,12 +42,16 @@ public class BoardController {
 	
 	@GetMapping("/get")
 	public String get(Long fno,Model model) {
+		Board read = service.get(fno);
+		if (read == null) throw new NotFoundBoardException();
 		model.addAttribute("board", service.get(fno));
 		return "board/get";
 	}
 	
 	@GetMapping("/modify")
-	public String modifyForm(Board board) {
+	public String modifyForm(Long fno,Board board) {
+		Board read = service.get(fno);
+		if (read == null) throw new NotFoundBoardException();
 		return "board/modify";
 	}
 	
@@ -72,6 +78,12 @@ public class BoardController {
 		rttr.addAttribute("category", board.getCategory());
 		service.register(board);
 		return "redirect:list/" + board.getCategory();
+	}
+	
+	@ExceptionHandler(NotFoundBoardException.class)
+	public String notFoundBoard() {
+		System.out.println("예외발생");
+		return "errorPage/notFoundBoard";
 	}
 	
 }

@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 <script src="${contextPath}/resources/js/get.js"></script>
-<form id="getForm">
-	<div class="container">
+<div class="container">
+	<form id="getForm">
 		<div class="getData">
 			<input type="hidden"name="page" id="page" value="${param.page}">
 			<input type="hidden"name="type" id="type" value="${param.type}">
@@ -31,39 +31,39 @@
 		<button class="btn btn-outline-primary btn-block modify">수정</button>
 		<button class="btn btn-outline-danger btn-block remove">삭제</button>
 		<button class="btn btn-outline-secondary btn-block list">목록</button>
-		<!-- 댓글 -->
-		<div class="card" style="margin-top: 20px;">
-    		<div class="card-header">
-			    <h4 class="card-title">댓글란</h4>
-	    	</div>
-	    	<div class="input-group mb-3" style="margin-top: 20px;">
-	    		<div class="input-group-prepend">
-	    			<input type="text" class="form-control" placeholder="닉네임">
-				</div>
-				<input type="text" class="form-control" placeholder="댓글을 입력하세요">
-				<div class="input-group-append">
-			    	<button class="btn btn-success" type="submit">등록</button>
-				</div>
+	</form>
+	<!-- 댓글 -->
+	<div class="card my-3">
+    	<div class="card-header">
+			<h4 class="card-title">댓글란</h4>
+	    </div>
+	    <div class="input-group">
+	    	<div class="input-group-prepend">
+	    		<input type="text" class="form-control" name="replyer" placeholder="닉네임">
 			</div>
-			<div class="card-body">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="panel panel-defoult">
-							<div class="panel-heading">
-								<h4 class="test">댓글을 입력해 주세요</h4>
-							</div>
-							<div class="panel-body">
-								<ul class="chat"></ul>
-							</div>
+			<input type="text" class="form-control" name="replyer" placeholder="댓글을 입력하세요">
+			<input type="hidden" name="regDate" >
+			<div class="input-group-append">
+		    	<button class="btn btn-success" id="addReplyBtn" type="submit">등록</button>
+			</div>
+		</div>
+		<!-- 댓글목록 -->
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-defoult">
+						<div class="panel-heading">
+							<h4 class="test">댓글</h4>
+						</div>
+						<div class="panel-body">
+							<ul class="chat"></ul>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	
-</form>
+</div>
 <script>
 $(function() {
 	let getForm = $("#getForm");

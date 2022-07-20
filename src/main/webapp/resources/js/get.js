@@ -1,3 +1,5 @@
+console.log(replyService)
+
 $(function(){
 	let fnoValue = $('input[name="fno"]').val();
 	let replyUL = $('.chat');
@@ -22,4 +24,9 @@ $(function(){
 		});
 	}
 	showList(1);
+	
+	function displayTime(timeValue){
+		let timeArr = JSON.stringify(timeValue).substr(1).split(",");
+		return `${timeArr[0]}년 ${timeArr[1]}월 ${timeArr[2]}일`;
+	}
 })

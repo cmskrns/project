@@ -37,11 +37,11 @@
     	<div class="card-header">
 			<h4 class="card-title">댓글란</h4>
 	    </div>
-	    <div class="input-group">
+	    <div class="input-group replyTag">
 	    	<div class="input-group-prepend">
-	    		<input type="text" class="form-control" name="replyer" placeholder="닉네임">
+	    		<input type="text" class="form-control" name="replyer" id="replyer" placeholder="닉네임">
 			</div>
-			<input type="text" class="form-control" name="replyer" placeholder="댓글을 입력하세요">
+			<input type="text" class="form-control" name="reply" id="reply" placeholder="댓글을 입력하세요">
 			<input type="hidden" name="regDate" >
 			<div class="input-group-append">
 		    	<button class="btn btn-success" id="addReplyBtn" type="submit">등록</button>
@@ -56,7 +56,7 @@
 							<h4 class="test">댓글</h4>
 						</div>
 						<div class="panel-body">
-							<ul class="chat"></ul>
+							<ul class="chat list-group"></ul>
 						</div>
 					</div>
 				</div>
@@ -64,6 +64,36 @@
 		</div>
 	</div>
 </div>
+<!-- The Modal -->
+<div class="modal fade" id="modReply">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">댓글 수정</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="reply">내용입력</label>
+                    <input class="form-control" name="reply" id="reply">
+                </div>
+                <div class="form-group">
+                    <label for="replyer">작성자</label>
+                    <input class="form-control" name="replyer" id="replyer">
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="modalModBtn">수정</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+            </div>            
+        </div>
+    </div>
+</div>
+  
 <script>
 $(function() {
 	let getForm = $("#getForm");

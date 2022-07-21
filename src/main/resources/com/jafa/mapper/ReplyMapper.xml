@@ -26,7 +26,6 @@
 	<update id="update">
 		update reply_tbl set
 		reply = #{reply},
-		replyer = #{replyer},
 		updateDate = now()
 		where rno = #{rno}
 	</update>

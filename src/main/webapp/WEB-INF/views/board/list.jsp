@@ -15,7 +15,8 @@
 			<form id="listForm">
 				<div class="input-group">
 		        	<div class="input-group-prepend">
-		            	<select name="type">
+		            	<select name="type" id="type">
+		            		<option value="">검색종류</option>
 							<option value="R" ${pageMaker.criteria.type eq 'R' ? 'selected' : ''}>제목</option>
 							<option value="A" ${pageMaker.criteria.type eq 'A' ? 'selected' : ''}>주소</option>
 		           		</select>
@@ -24,7 +25,7 @@
 		        		<input type="text" name="keyword" class="form-control" value="${pageMaker.criteria.keyword}" placeholder="검색어를 입력해 주세요">
 		        	</div>
 		        	<div class="input-group-append">
-		            	<button class="btn btn-success">검색</button>
+		            	<button class="btn btn-success searchBtn">검색</button>
 		        	</div>
 		    	</div>
 			</form>
@@ -119,6 +120,13 @@ $(function() {
 		listForm.attr("action","${contextPath}/board/get");
 		listForm.submit();
 	}); 
+	
+	$('.searchBtn').on('click',function(e){
+		if ($('#type').val()=='') {
+			alert('검색종류를 선택해주세요!')
+			e.preventDefault();
+		}
+	})
 	
 })
 </script>

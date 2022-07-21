@@ -3,11 +3,11 @@
 let replyService = (function(){
 	
 	//댓글 등록
-	function add(reply, collback){
+	function add(reply, callback,error){
 		
 		$.ajax({
 			type : 'post',
-			url : '/replies/new',
+			url : contextPath+'/replies/new',
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr){
@@ -57,6 +57,7 @@ let replyService = (function(){
 		});
 	}
 	
+	//수정
 	function update(reply, callback, error){
 		$.ajax({
 			type : 'put',
@@ -77,7 +78,7 @@ let replyService = (function(){
 	}
 	
 	function get(rno, callback, error){
-		$.get("/replies/"+rno+".json", function(result){
+		$.get(contextPath+"/replies/"+rno+".json", function(result){
 			if(callback){
 				callback(result);
 			}

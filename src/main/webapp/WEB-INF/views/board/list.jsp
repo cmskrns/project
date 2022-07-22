@@ -55,7 +55,7 @@
 						<td style="width: 37%">
 							
 							<a class="text-reset get" href="${b.fno}">
-								${b.rtName}
+								${b.rtName}[${b.replyCnt}]
 							</a>
 						</td>
 						<td style="width: 15%" class="text-center">${b.addr}</td>

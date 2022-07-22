@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
+<script src="${contextPath}/resources/js/register.js"></script>
 <div class="container" style="text-align: center; padding-top: 20px">
   <h2>게시글 작성</h2>
 </div>
@@ -47,6 +48,23 @@
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">내용</label>
 			<textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="10"></textarea>          
+		</div>
+		<div class="row my-3">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header">
+						<h4>파일첨부</h4>
+					</div>
+					<div class="card-body">
+						<div class="uploadDiv">
+							<input type="file" name="uploadFile" multiple="multiple">
+						</div>
+						<div class="uploadResult">
+							<ul class="list-group"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	 	<button class="btn btn-primary btn-block">등록</button>
 	</div>

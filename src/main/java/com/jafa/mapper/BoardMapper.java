@@ -10,11 +10,15 @@ import com.jafa.model.Reply;
 
 public interface BoardMapper {
 	List<Board> getList(@Param("cri") Criteria criteria);
+	List<Reply> getReplyList(Long fno);
+	
 	Board get(Long fno);
 	void insert(Board board);
 	void update(Board board);
 	void delete(Long fno);
 	int totalCount(@Param("cri") Criteria criteria);
 	
-	List<Reply> getReplyList(Long fno);
+	void updateReplyCnt(@Param("fno") Long fno,@Param("amount") int amount);
+	
+	
 }

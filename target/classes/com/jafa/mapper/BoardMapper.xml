@@ -81,4 +81,9 @@
   	<delete id="delete">
   		delete from project_tbl where fno =#{fno}
   	</delete>
+  	
+  	<!-- 댓글 증감 -->
+  	<update id="updateReplyCnt">
+  		update project_tbl set replyCnt = replyCnt + #{amount} where fno = #{fno}
+  	</update>
 	</mapper>

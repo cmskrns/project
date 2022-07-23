@@ -15,10 +15,24 @@ $(function(){
 		return true;
 	}
 	
-	let uploadResult = $('.uploadResult ul')
-	function showUploadResult(uploadResultArr){
-		if(!uploadResultArr || uploadResultArr.length == 0) {return;}
+	$('input[type="file"]').change(function(){
+		let formData = new FormData();
+		let inputFile = $('input[name="uploadFile"]');
+		let files = inputFile[0].files;
 		
-		let st = "";
-	}
+		for(let f of files){
+			if(!checkExtension(f.name, f.size)){ return false;}
+			formData.append("uploadFile", f)
+		}
+		$.ajax({
+			url : contextPath+"/uploadAjaxAction",
+			type : 'POST',
+			processData : false,
+			contentType : false,
+			data : formData,
+			success : function(result){
+				showUploadResult(result);
+			}
+		})
+	})
 })

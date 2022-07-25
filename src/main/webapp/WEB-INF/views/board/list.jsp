@@ -48,13 +48,13 @@
 						<th scope="col" class="text-center">조회수</th>
 					</tr>
 				</thead>
-				<c:forEach items="${list}" var="b">
 				<tbody>
+				<c:forEach items="${list}" var="b">
 					<tr>
 						<td style="width: 8%" class="text-center">${b.fno}</td>
 						<td style="width: 37%">
-							
 							<a class="text-reset get" href="${b.fno}">
+								<img alt="" src="${contextPath}/display?fileName=${b.attachList[0].imageName}" style="width: 50px;">
 								${b.rtName}[${b.replyCnt}]
 							</a>
 						</td>
@@ -66,9 +66,8 @@
 						</td>
 						<td style="width: 10%" class="text-center"></td>
 					</tr>
-			
-				</tbody>
 				</c:forEach>
+				</tbody>
 			</table>
 		</div>
 	</div>

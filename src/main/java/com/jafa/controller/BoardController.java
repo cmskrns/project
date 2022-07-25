@@ -1,5 +1,9 @@
 package com.jafa.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jafa.exception.NotFoundBoardException;
 import com.jafa.mapper.BoardMapper;
 import com.jafa.model.Board;
+import com.jafa.model.BoardAttachVO;
 import com.jafa.model.Criteria;
 import com.jafa.model.PageMaker;
 import com.jafa.service.BoardService;
@@ -30,6 +35,7 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 	
+	//게시물리스트
 	@GetMapping("/list/{category}")
 	public String boardList(@PathVariable String category, Criteria criteria, Model model) {
 		criteria.setCategory(category);
@@ -40,14 +46,16 @@ public class BoardController {
 		return "board/list";
 	}
 	
+	//단일게시물
 	@GetMapping("/get")
 	public String get(Long fno,Model model) {
-		Board read = service.get(fno);
+		Board read = service.get(fno); 
 		if (read == null) throw new NotFoundBoardException();
 		model.addAttribute("board", service.get(fno));
 		return "board/get";
 	}
 	
+	//게시물 수정
 	@GetMapping("/modify")
 	public String modifyForm(Long fno,Board board) {
 		Board read = service.get(fno);
@@ -62,13 +70,19 @@ public class BoardController {
 		return "redirect:list/"+ board.getCategory();
 	}
 	
+	//게시글 삭제
 	@PostMapping("/remove")
 	public String remove(Long fno,String category,RedirectAttributes rttr) {
+		
+		List<BoardAttachVO> attachList = service.getAttachList(fno);
+		deleteFiles(attachList);
 		rttr.addAttribute("category", category);
 		service.remove(fno);
 		return "redirect:list/" + category;
 	}
 
+	
+	//게시글 추가
 	@GetMapping("/register")
 	public String registerForm() {
 		return "board/register";
@@ -80,10 +94,29 @@ public class BoardController {
 		return "redirect:list/" + board.getCategory();
 	}
 	
+	//예외처리
 	@ExceptionHandler(NotFoundBoardException.class)
 	public String notFoundBoard() {
 		System.out.println("예외발생");
 		return "errorPage/notFoundBoard";
+	}
+	
+	private void deleteFiles(List<BoardAttachVO> attachList) {
+		if (attachList == null || attachList.size() == 0) {return;}
+		
+		attachList.forEach(attach ->{
+			Path file = Paths.get("C:/Project/"+attach.getUploadPath()+"/"+attach.getUuid()+"_"+attach.getFileName());
+			
+			try {
+				Files.deleteIfExists(file);
+				if (Files.probeContentType(file).startsWith("image")) {
+					Path thumbNail = Paths.get("C:/Project/"+attach.getUploadPath()+"/s_"+attach.getUuid()+"_"+attach.getFileName());
+					Files.deleteIfExists(thumbNail);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
 }

@@ -23,35 +23,35 @@
 				AND category=#{cri.category}
 			</where>
 		</sql>
+		
+		<resultMap type="com.jafa.model.Board" id="attach_result">
+			<result property="fno" column="fno"/>
+			<result property="category" column="category"/>
+			<result property="writer" column="writer"/>
+			<result property="rtName" column="rtName"/>
+			<result property="addr" column="addr"/>
+			<result property="description" column="description"/>
+			<result property="avgPrice" column="avgPrice"/>
+			<result property="avgDelivery" column="avgDelivery"/>
+			<result property="regDate" column="regDate"/>
+			<result property="updateDate" column="updateDate"/>
+			<result property="replyCnt" column="replyCnt"/>
+			<collection property="attachList" column="fno" javaType="java.util.ArrayList"
+			ofType="com.jafa.model.BoardAttachVO" select="attachList"/>
+		</resultMap>
 	
-  	<select id="getList" resultType="com.jafa.model.Board">
+	<select id="attachList" resultType="com.jafa.model.BoardAttachVO">
+		select * from attach_tbl where fno = #{fno} and fileType ='1'
+	</select>
+	
+  	<select id="getList" resultMap="attach_result">
 	    select * from project_tbl 
 	    <include refid="search"/>
 	    order by fno desc limit #{cri.pageStart},#{cri.perPageNum};
   	</select>
   	
-  	<select id="get" resultMap="boardResult">
+  	<select id="get" resultMap="attach_result">
   		select * from project_tbl where fno = #{fno};
-  	</select>
-  	
-  	<resultMap type="com.jafa.model.Board" id="boardResult">
-  		<result property="fno" column="fno"/>
-  		<result property="category" column="category"/>
-  		<result property="writer" column="writer"/>
-  		<result property="rtName" column="rtName"/>
-  		<result property="addr" column="addr"/>
-  		<result property="description" column="description"/>
-  		<result property="avgPrice" column="avgPrice"/>
-  		<result property="avgDelivery" column="avgDelivery"/>
-  		<result property="regDate" column="regDate"/>
-  		<result property="updateDate" column="updateDate"/>
-  		<result property="replyCnt" column="replyCnt"/>
-  		<collection property="replyList" column="fno" javaType="java.util.ArrayList"
-  		ofType="com.jafa.model.Reply" select="getReplyList"/>
-  	</resultMap>
-  	
-  	<select id="getReplyList" resultType="com.jafa.model.Reply">
-  		select * from project_tbl where fno = #{fno}
   	</select>
   	
   	<select id="totalCount" resultType="int">

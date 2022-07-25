@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.jafa.model.Board;
+import com.jafa.model.BoardAttachVO;
 import com.jafa.model.Criteria;
 import com.jafa.model.Reply;
 
@@ -19,6 +20,8 @@ public interface BoardMapper {
 	int totalCount(@Param("cri") Criteria criteria);
 	
 	void updateReplyCnt(@Param("fno") Long fno,@Param("amount") int amount);
+	
+	List<BoardAttachVO> attachList(Long fno);
 	
 	
 }

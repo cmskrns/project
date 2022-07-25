@@ -26,5 +26,6 @@ public class Board {
 	private LocalDateTime updateDate;
 	
 	private int replyCnt;
-	private List<Reply> replyList;
+	private List<Reply> replyList; 
+	private List<BoardAttachVO> attachList; 
 }

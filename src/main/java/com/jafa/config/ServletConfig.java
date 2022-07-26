@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
-@ComponentScan("com.jafa")
+@ComponentScan(basePackages = {"com.jafa"})
 public class ServletConfig implements WebMvcConfigurer{
 
 

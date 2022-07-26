@@ -44,9 +44,17 @@ public class BoardServiceImpl implements BoardService {
 		});
 	}
 
+	@Transactional
 	@Override
 	public void modify(Board board) {
+		attachMapper.deleteAll(board.getFno());
 		mapper.update(board);
+		if (board.getAttachList()!=null) {
+			board.getAttachList().forEach(attach ->{
+				attach.setFno(board.getFno());
+				attachMapper.insert(attach);
+			});
+		}
 	}
 
 	@Transactional

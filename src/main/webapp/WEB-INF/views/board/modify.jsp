@@ -100,17 +100,17 @@ function showUploadResult(uploadResultArr) {
 		
 		str+= "<li class='list-group-item' data-path='"+obj.uploadPath+"'"
 	    str+= "data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>"
-		str += "<img src='${contextPath}/display?fileName="+fileCellPath+"'>"+obj.fileName
+		str += "<img src='"+contextPath+"/display?fileName="+fileCellPath+"'>"+obj.fileName
 		str+= "<div class='d-flex justify-content-end'><span data-file='"+fileCellPath+"' data-type='image' class='btn btn-primary'> 삭제 </span></div>"
 		str += "</li>"
 		
 	})
-	uploadResult.append(str);
+	$(".uploadResult ul").append(str);
 }
 
 $(function(){
 	let fnoValue = "${board.fno}"
-	$.getJSON(contextPath+"/project/getAttachList",{fno : fnoValue}, function(attachList){
+	$.getJSON(contextPath+"/board/getAttachList",{fno : fnoValue}, function(attachList){
 		showUploadResult(attachList);
 	})
 	

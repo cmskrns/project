@@ -7,12 +7,18 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @MapperScan("com.jafa.mapper")
+@EnableScheduling
+@ImportResource(value = {
+		"classpath:config/security-context.xml"
+})
 public class RootConfig {
 
 	@Bean

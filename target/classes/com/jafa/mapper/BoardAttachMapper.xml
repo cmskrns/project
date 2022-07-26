@@ -18,6 +18,7 @@
 		delete from attach_tbl where fno = #{fno}
 	</delete>
 	
+	<!-- 업로드 파일 갱신 -->
 	<select id="getOldFiles" resultType="com.jafa.model.BoardAttachVO">
 		select * from attach_tbl where uploadPath =
 		 date_format( date_add(now(), interval-1 day),'%Y\\%m\\%d')

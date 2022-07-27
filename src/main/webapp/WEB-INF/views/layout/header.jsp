@@ -47,7 +47,7 @@
   	</div>
 	<ul class="navbar-nav">
 		<li class="nav-item">
-			<a class="nav-link">로그인</a>
+			<a class="nav-link" href="${contextPath }/projectLogin">로그인</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link">회원가입</a>

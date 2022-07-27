@@ -3,26 +3,28 @@ package com.jafa.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CommonController {
 	
 	@GetMapping("/accessError")
-	public String accessDenied() {
+	public String accessDenied(String msg) {
+		System.out.println(msg);
 		return "errorPage/accessError";
 	}
 	
-	@GetMapping("/projectLogin")
+	@RequestMapping("/projectLogin")
 	public String loginForm(String error, Model model) {
 		if (error != null) {
 			System.out.println(error);
 			model.addAttribute("error", error);
 		}
-		return "member/login";
+		return "member/projectLogin";
 	}
 	
 	@GetMapping("/projectLogout")
 	public String logout() {
-		return "member/logout";
+		return "member/projectLogout";
 	}
 }

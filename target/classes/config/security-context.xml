@@ -5,20 +5,28 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	
+	<bean id="loginSuccess" class="com.jafa.security.LoginSuccessHandler"></bean>
+	<bean id="customAccessDeniedHandler" class="com.jafa.security.CustomAccessDeniedHandler"></bean>
+	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	<bean id="projectUserDetailsService" class="com.jafa.security.ProjectUserDetailsService"/>
+	
 	<security:http>
 		<security:intercept-url pattern="/stratum/all" access="permitAll"/>
 		<security:intercept-url pattern="/stratum/user" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/stratum/admin" access="hasRole('ROLE_ADMIN')"/>
-		<security:form-login login-page="/projectLogin"/>
-		<security:access-denied-handler error-page="/accessError"/>
+		<security:form-login login-page="/projectLogin" 
+			username-parameter="loginId"
+			password-parameter="loginPw"
+			login-processing-url="/projectLogin"/>
+			
+		<security:access-denied-handler ref="customAccessDeniedHandler"/>
+		<security:csrf disabled="true"/>
 	</security:http>
 	
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="user" password="{noop}1234" authorities="ROLE_USER"/>
-				<security:user name="admin" password="{noop}1234" authorities="ROLE_USER, ROLE_ADMIN"/>
-			</security:user-service>
+		<security:authentication-provider user-service-ref="projectUserDetailsService">
+			<security:password-encoder ref="bCryptPasswordEncoder"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>

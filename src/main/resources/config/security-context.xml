@@ -19,7 +19,8 @@
 			username-parameter="loginId"
 			password-parameter="loginPw"
 			login-processing-url="/projectLogin"/>
-			
+		<security:logout logout-url="/projectLogout" invalidate-session="true"/>
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
 		<security:access-denied-handler ref="customAccessDeniedHandler"/>
 		<security:csrf disabled="true"/>
 	</security:http>

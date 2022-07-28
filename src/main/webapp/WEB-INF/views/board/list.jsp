@@ -30,9 +30,11 @@
 		    	</div>
 			</form>
 		</div>
-		<div class="col-md-3 text-right">
-			<a href="${contextPath}/board/register" class="btn btn-primary">작성</a>
-		</div>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<div class="col-md-3 text-right">
+				<a href="${contextPath}/board/register" class="btn btn-primary">작성</a>
+			</div>
+		</sec:authorize>
 	</div>
 	<!-- 게시물 -->
 	<div class="row">

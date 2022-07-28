@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jafa.mapper.BoardAttachMapper;
 import com.jafa.mapper.BoardMapper;
+import com.jafa.mapper.ReplyMapper;
 import com.jafa.model.Board;
 import com.jafa.model.BoardAttachVO;
 import com.jafa.model.Criteria;
@@ -20,6 +21,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	BoardAttachMapper attachMapper;
+	
+	@Autowired
+	ReplyMapper replyMapper;
+	
 	
 	@Override
 	public List<Board> getList(Criteria criteria) {

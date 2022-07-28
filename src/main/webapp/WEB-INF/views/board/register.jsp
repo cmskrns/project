@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="form-group">
 			<label for="exampleFormControlInput1">작성자</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="writer" value="관리자" placeholder="관리자" >
+			<input type="text" class="form-control" id="exampleFormControlInput1" name="writer" value="관리자" placeholder="관리자" readonly="readonly">
 		</div> 
 		<div class="form-group">
 			<label for="exampleFormControlInput1">제목</label>

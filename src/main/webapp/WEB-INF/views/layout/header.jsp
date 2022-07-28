@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
@@ -47,10 +48,23 @@
   	</div>
 	<ul class="navbar-nav">
 		<li class="nav-item">
-			<a class="nav-link" href="${contextPath }/projectLogin">로그인</a>
+			<sec:authorize access="isAnonymous()">
+				<a class="nav-link" href="${contextPath }/projectLogin">로그인</a>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<form action="${contextPath}/projectLogout" method="post">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<button>로그아웃</button>
+				</form>
+			</sec:authorize>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link">회원가입</a>
+			<sec:authorize access="isAnonymous()">
+				<a class="nav-link">회원가입</a>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<a class="nav-link" href="">마이페이지</a>
+			</sec:authorize>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link">한국어/영어</a>

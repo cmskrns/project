@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -60,13 +61,14 @@ public class BoardController {
 	}
 	
 	//게시물 수정
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/modify")
 	public String modifyForm(Long fno,Board board) {
 		Board read = service.get(fno);
 		if (read == null) throw new NotFoundBoardException();
 		return "board/modify";
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping("/modify")
 	public String modify(Board board, RedirectAttributes rttr) {
 		rttr.addAttribute("category", board.getCategory());
@@ -75,6 +77,7 @@ public class BoardController {
 	}
 	
 	//게시글 삭제
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping("/remove")
 	public String remove(Long fno,String category,RedirectAttributes rttr) {
 		
@@ -87,10 +90,12 @@ public class BoardController {
 
 	
 	//게시글 추가
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/register")
 	public String registerForm() {
 		return "board/register";
 	}
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping("/register")
 	public String register(Board board, RedirectAttributes rttr) {
 		rttr.addAttribute("category", board.getCategory());

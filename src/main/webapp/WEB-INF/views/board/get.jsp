@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
+
+<%-- get.js에 로그인한 사용자 값 전달 --%>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="userName"/>
+	<script>let userName = "${userName}"</script>
+</sec:authorize>
+<sec:authorize access="isAnonymous()">
+	<script>let userName = "_anonymous"</script>
+</sec:authorize>
+
 <script src="${contextPath}/resources/js/get.js"></script>
 <div class="container">
 	<form id="getForm">
@@ -36,8 +47,10 @@
 			    
 			</div>
 		</div> <br>
-		<button class="btn btn-outline-primary btn-block modify">수정</button>
-		<button class="btn btn-outline-danger btn-block remove">삭제</button>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<button class="btn btn-outline-primary btn-block modify">수정</button>
+			<button class="btn btn-outline-danger btn-block remove">삭제</button>
+		</sec:authorize>
 		<button class="btn btn-outline-secondary btn-block list">목록</button>
 	</form>
 	<!-- 댓글 -->
@@ -45,16 +58,29 @@
     	<div class="card-header">
 			<h4 class="card-title">댓글란</h4>
 	    </div>
-	    <div class="input-group replyTag">
-	    	<div class="input-group-prepend">
-	    		<input type="text" class="form-control" name="replyer" id="replyer" placeholder="닉네임">
+	    <!-- 로그인시 -->
+	    <sec:authorize access="isAuthenticated()">
+		    <div class="input-group replyTag">
+		    	<div class="input-group-prepend">
+		    		<input type="text" class="form-control" name="replyer" id="replyer" value="${userName}" readonly="readonly">
+				</div>
+				<input type="text" class="form-control" name="reply" id="reply" placeholder="댓글을 입력하세요">
+				<input type="hidden" name="regDate" >
+				<div class="input-group-append">
+			    	<button class="btn btn-success" id="addReplyBtn" type="submit">등록</button>
+				</div>
 			</div>
-			<input type="text" class="form-control" name="reply" id="reply" placeholder="댓글을 입력하세요">
-			<input type="hidden" name="regDate" >
-			<div class="input-group-append">
-		    	<button class="btn btn-success" id="addReplyBtn" type="submit">등록</button>
+		</sec:authorize>
+		<!-- 로그인이 안됐을 때 -->
+		<sec:authorize access="isAnonymous()">
+			<div class="input-group replyTag">
+		    	<div class="input-group-prepend">
+		    		<input type="text" class="form-control" placeholder="닉네임" disabled="disabled">
+				</div>
+				<input type="text" class="form-control"  placeholder="댓글 사용시 로그인하셔야 합니다" disabled="disabled">
+				<input type="hidden" name="regDate" >
 			</div>
-		</div>
+		</sec:authorize>
 		<!-- 댓글목록 -->
 		<div class="card-body">
 			<div class="row">
@@ -105,6 +131,8 @@
 <script>
 $(function() {
 	let getForm = $("#getForm");
+	let tagLi = $('.chat');
+	
 	$('#getForm .list').on('click',function(e){
 		e.preventDefault();
 		let categoryTag = $('input[name="category"]').clone();
@@ -128,9 +156,15 @@ $(function() {
 	}) 
 	$('#getForm .remove').on('click',function(e){
 		e.preventDefault();
-		getForm.attr("method","post");
-		getForm.attr("action","remove");
-		getForm.submit();
+		if (tagLi.children().length != 0) {
+			alert("댓글이 존재합니다")
+			
+		}else {
+			getForm.attr("method","post");
+			getForm.attr("action","remove");
+			getForm.submit();
+			
+		}
 	})
 })
 

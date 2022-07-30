@@ -39,7 +39,7 @@
 	    <li class="nav-item dropdown">
 		   	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">유저게시판</a>
 		    <div class="dropdown-menu">
-		      <a class="dropdown-item" href="#">자유게시판</a>
+		      <a class="dropdown-item" href="${contextPath }/userboard/list/자유게시판">자유게시판</a>
 		      <a class="dropdown-item" href="#">나만의 팁</a>
 		      <a class="dropdown-item" href="#">음식 자랑</a>
 		    </div>

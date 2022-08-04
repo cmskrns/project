@@ -15,11 +15,11 @@ public class UserBoardMapperTest extends AppTest {
 	@Autowired
 	UserBoardMapper mapper;
 	
-	@Test
-	public void listTest() {
-		List<UserBoard> list = mapper.getList();
-		assertEquals(3,list.size());
-	}
+//	@Test
+//	public void listTest() {
+//		List<UserBoard> list = mapper.getList();
+//		assertEquals(3,list.size());
+//	}
 	
 	@Test
 	public void getTest() {

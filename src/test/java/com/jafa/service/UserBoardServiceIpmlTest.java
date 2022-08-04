@@ -15,10 +15,10 @@ public class UserBoardServiceIpmlTest extends AppTest{
 	@Autowired
 	UserBoardService service;
 	
-	@Test
-	public void getListTest() {
-		List<UserBoard> list = service.getList();
-		assertEquals(3, list.size());
-	}
+//	@Test
+//	public void getListTest() {
+//		List<UserBoard> list = service.getList();
+//		assertEquals(3, list.size());
+//	}
 
 }

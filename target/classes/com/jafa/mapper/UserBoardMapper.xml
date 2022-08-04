@@ -2,12 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jafa.mapper.UserBoardMapper">
 	
+	<sql id="search">
+		<where>
+			<trim prefixOverrides="OR">
+				<foreach collection="cri.typeCollection">
+					<trim prefix="OR">
+						<choose>
+							<when test="cri.type=='T'.toString()">
+								title like concat('%',#{cri.keyword},'%')
+							</when>
+							<when test="cri.type=='W'.toString()">
+								writer like concat('%',#{cri.keyword},'%')
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+			AND category=#{cri.category}
+		</where>
+	</sql>
+	
+	
 	<select id="getList" resultType="com.jafa.model.UserBoard">
 		select * from userboard_tbl
+		<include refid="search"/>
+		order by bno desc limit #{cri.pageStart},#{cri.perPageNum}
 	</select>
 	
 	<select id="get" resultType="com.jafa.model.UserBoard">
 		select * from userboard_tbl where bno =#{bno}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		select count(*) from userboard_tbl <include refid="search"/>
 	</select>
 	
 	<insert id="insert">
@@ -20,7 +47,7 @@
 	
 	<update id="update">
 		update userboard_tbl set
-		categroy = #{categroy},
+		category = #{category},
 		title = #{title},
 		content = #{content},
 		writer = #{writer},

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jafa.mapper.UserBoardMapper;
+import com.jafa.model.Criteria;
 import com.jafa.model.UserBoard;
 
 @Service
@@ -15,8 +16,8 @@ public class UserBoardServiceIpml implements UserBoardService {
 	UserBoardMapper mapper;
 	
 	@Override
-	public List<UserBoard> getList() {
-		return mapper.getList();
+	public List<UserBoard> getList(Criteria criteria) {
+		return mapper.getList(criteria);
 	}
 
 	@Override
@@ -37,6 +38,11 @@ public class UserBoardServiceIpml implements UserBoardService {
 	@Override
 	public void remove(Long bno) {
 		mapper.delete(bno);
+	}
+
+	@Override
+	public int totalCount(Criteria criteria) {
+		return mapper.totalCount(criteria);
 	}
 
 }

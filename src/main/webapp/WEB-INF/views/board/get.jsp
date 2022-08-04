@@ -44,7 +44,6 @@
 				    <p>설명 : ${board.description} </p>
 				    <p>작성자 : ${board.writer} </p>
 			    </div>
-			    
 			</div>
 		</div> <br>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">

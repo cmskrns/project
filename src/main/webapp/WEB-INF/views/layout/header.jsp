@@ -39,9 +39,9 @@
 	    <li class="nav-item dropdown">
 		   	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">유저게시판</a>
 		    <div class="dropdown-menu">
-		      <a class="dropdown-item" href="${contextPath }/userboard/list/자유게시판">자유게시판</a>
-		      <a class="dropdown-item" href="#">나만의 팁</a>
-		      <a class="dropdown-item" href="#">음식 자랑</a>
+		      <a class="dropdown-item" href="${contextPath }/userboard/list/Free">자유게시판</a>
+		      <a class="dropdown-item" href="${contextPath }/userboard/list/Tip">팁 게시판</a>
+		      <a class="dropdown-item" href="${contextPath }/userboard/list/Recommend">추천합니다</a>
 		    </div>
 	  	</li>
 	  	</ul>
@@ -60,7 +60,7 @@
 		</li>
 		<li class="nav-item">
 			<sec:authorize access="isAnonymous()">
-				<a class="nav-link">회원가입</a>
+				<a class="nav-link" href="${contextPath }/userboard/memberinsert">회원가입</a>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<a class="nav-link" href="">마이페이지</a>
@@ -71,9 +71,3 @@
 		</li>
 	</ul>
 </nav>
-
-
-
-<style>
-
-</style>

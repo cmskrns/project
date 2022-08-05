@@ -3,6 +3,7 @@ package com.jafa.service;
 import java.util.List;
 
 import com.jafa.model.Criteria;
+import com.jafa.model.UserBoardAttachVO;
 import com.jafa.model.UserReply;
 
 public interface UserReplyService {
@@ -12,4 +13,5 @@ public interface UserReplyService {
 	UserReply get(Long rno);
 	int modify(UserReply reply);
 	int remove(Long rno);
+	
 }

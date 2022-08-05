@@ -15,6 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>let contextPath = "${contextPath}"</script>
 <script src="${contextPath}/resources/js/reply.js"></script>
+<script src="${contextPath}/resources/js/userReply.js"></script>
 </head>
 <body>
 

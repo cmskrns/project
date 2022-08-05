@@ -3,15 +3,18 @@ package com.jafa.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jafa.mapper.UserBoardMapper;
 import com.jafa.mapper.UserReplyMapper;
 import com.jafa.model.Criteria;
+import com.jafa.model.UserBoardAttachVO;
 import com.jafa.model.UserReply;
 
 import lombok.Setter;
 
+@Service
 public class UserReplyServiceIpml implements UserReplyService {
 
 	private final static int REPLY_ADD = 1;
@@ -49,8 +52,9 @@ public class UserReplyServiceIpml implements UserReplyService {
 	@Override
 	public int remove(Long rno) {
 		UserReply reply = mapper.read(rno);
-		boardMapper.updateReplyCnt(reply.getBno(), REPLY_ADD);
+		boardMapper.updateReplyCnt(reply.getBno(), REPLY_DEL);
 		return mapper.delete(rno);
 	}
+
 
 }

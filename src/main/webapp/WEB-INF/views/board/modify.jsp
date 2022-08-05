@@ -156,6 +156,25 @@ $(function(){
 		})
 		modifyForm.append(str).submit();
 	})
+//업로드 파일삭제
+$('.uploadResult ul').on('click','span',function(){
+	let targetFile = $(this).data('file');
+	let type = $(this).data('type');
+	let targetLi =$(this).closest('li');
+	
+	$.ajax({
+		url :contextPath + "/deleteUserFile",
+		type : 'POST',
+		data : {fileName : targetFile, type : type},
+		dataType : 'text',
+		success : function(result){
+			alert("삭제하였습니다");
+			$('input[name="uploadFile"]').val("");
+			targetLi.remove();
+			
+		}
+	})
+})
 })
 </script>
 <%@ include file="/WEB-INF/views/layout/footer.jsp" %>

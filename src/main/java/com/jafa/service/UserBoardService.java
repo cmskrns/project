@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jafa.model.Criteria;
 import com.jafa.model.UserBoard;
+import com.jafa.model.UserBoardAttachVO;
 
 public interface UserBoardService {
 
@@ -14,4 +15,5 @@ public interface UserBoardService {
 	void remove(Long bno);
 	int totalCount(Criteria criteria);
 	
+	List<UserBoardAttachVO> getAttachList(Long bno);
 }

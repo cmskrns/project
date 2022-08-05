@@ -52,7 +52,7 @@
 							<td style="width: 10%" class="text-center">${b.bno}</td>
 							<td style="width: 30%">
 								<a class="text-reset get" href="${b.bno}">
-									${b.title}
+									${b.title}[${b.replyCnt}]
 								</a>
 							</td>
 							<td style="width: 15%" class="text-center">${b.writer}</td>

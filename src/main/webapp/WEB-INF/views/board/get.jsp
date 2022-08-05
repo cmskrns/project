@@ -11,7 +11,6 @@
 <sec:authorize access="isAnonymous()">
 	<script>let userName = "_anonymous"</script>
 </sec:authorize>
-
 <script src="${contextPath}/resources/js/get.js"></script>
 <div class="container">
 	<form id="getForm">

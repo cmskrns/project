@@ -1,6 +1,7 @@
 package com.jafa.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +23,7 @@ public class UserBoard {
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
 	
+	private int replyCnt;
+	private List<UserReply> replyList;
+	private List<UserBoardAttachVO> attachList;
 }

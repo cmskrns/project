@@ -9,10 +9,10 @@
 		</div>
 		<form action="${contextPath}/projectLogin" method="post">
 			<div class="form-group">
-				<input type="text" name="loginId" value="${loginId }" placeholder="아이디" class="form-control">
+				<input type="text" name="loginId" id="loginId" value="${loginId }" placeholder="아이디" class="form-control">
 			</div>
 			<div class="form-group">
-				<input type="password" name="loginPw" placeholder="비밀번호" class="form-control">
+				<input type="password" name="loginPw" id="loginPw" placeholder="비밀번호" class="form-control">
 			</div>
 			<div class="form-group">
 				<label for="remember-me">Remember Me</label>
@@ -22,12 +22,27 @@
 				${errorMessage}
 			</div>
 			<div class="form-group">
-				<button class="btn btn-primary form-control">로그인</button>
+				<button class="btn btn-primary form-control loginBtn">로그인</button>
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</form>
 	</div>
 </div>
+
+<script>
+$(function(){
+	$('.loginBtn').on('click',function(e){
+		if ($('#loginId').val()=='') {
+			alert('아이디를 입력해주세요')
+			e.preventDefault();
+		}else if($('#loginPw').val()=='') {
+			alert('비밀번호를 입력해주세요')
+			e.preventDefault();
+		}
+		
+	})
+})
+</script>
 <style>
 	.loginForm{width: 400px; margin: auto;}
 </style>

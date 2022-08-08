@@ -14,4 +14,7 @@ public class AuthVO {
 	
 	private String userId;
 	private String auth;
+	public AuthVO(String auth) {
+		this.auth = auth;
+	}
 }

@@ -61,7 +61,7 @@
 		</li>
 		<li class="nav-item">
 			<sec:authorize access="isAnonymous()">
-				<a class="nav-link" href="${contextPath }/userboard/memberinsert">회원가입</a>
+				<a class="nav-link" href="${contextPath }/member/memberinsert">회원가입</a>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<a class="nav-link" href="">마이페이지</a>

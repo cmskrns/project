@@ -42,12 +42,6 @@ public class UserBoardController {
 	@Autowired
 	UserBoardMapper mapper;
 	
-	@GetMapping("/memberinsert")
-	public String memberinsert() {
-		
-		return "userboard/memberinsert";
-	}
-	
 	@GetMapping("/list/{category}")
 	public String userboardList(@PathVariable String category,Criteria criteria,Model model) {
 		criteria.setCategory(category);

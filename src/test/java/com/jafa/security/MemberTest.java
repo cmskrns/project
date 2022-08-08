@@ -45,7 +45,7 @@ public class MemberTest extends AppTest{
 	
 	@Test
 	public void adminInserTest() {
-		String sql = "insert into member_tbl(userId,userPw,userName,userEmail,addr) values(?,?,?,?,?)";
+		String sql = "insert into member_tbl(userId,userPw,userName,userEmail,addr,phoneNumber,age,natalDay,gender) values(?,?,?,?,?,?,?,?,?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -57,6 +57,10 @@ public class MemberTest extends AppTest{
 			pstmt.setString(3, "관리자");
 			pstmt.setString(4, "admin@naver.com");
 			pstmt.setString(5, "대구 북구");
+			pstmt.setString(6,"010-5156-5567");
+			pstmt.setString(7,"27");
+			pstmt.setString(8,"1996년03월09일");
+			pstmt.setString(9,"M");
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

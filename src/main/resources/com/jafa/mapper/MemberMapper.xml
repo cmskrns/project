@@ -9,6 +9,10 @@
 		<result property="userName" column="userName"/>
 		<result property="userEmail" column="userEmail"/>
 		<result property="addr" column="addr"/>
+		<result property="phoneNumber" column="phoneNumber"/>
+		<result property="age" column="age"/>
+		<result property="natalDay" column="natalDay"/>
+		<result property="gender" column="gender"/>
 		<result property="enabled" column="enabled"/>
 		<result property="regDate" column="regDate"/>
 		<result property="updateDate" column="updateDate"/>
@@ -20,8 +24,24 @@
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
+	<insert id="insert">
+		insert into member_tbl(userId,userPw,userName,userEmail,addr,phoneNumber,age,natalDay,gender) values (#{userId},#{userPw},#{userName},#{userEmail},#{addr},#{phoneNumber},#{age},#{natalDay},#{gender})
+	</insert>
+	
+	<insert id="authenticate">
+		insert into member_auth value (#{userId},#{auth})
+	</insert>
+	
+	<select id="authList" resultType="com.jafa.model.AuthVO">
+		select * form member_auth
+	</select>
+	
 	<select id="read" resultMap="memberMap">
 		select * from member_tbl M inner join member_auth A
 		on M.userId = A.userId where M.userId = #{userId}
+	</select>
+	
+	<select id="findByUserId" resultType="com.jafa.model.MemberVO">
+		select * from member_tbl where userId = #{userId}
 	</select>
 </mapper>

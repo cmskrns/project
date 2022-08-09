@@ -8,7 +8,7 @@ import com.jafa.model.Criteria;
 
 public interface BoardService {
 	List<Board> getList(Criteria criteria);
-	Board get(Long fno);
+	Board get(Long fno, boolean isAddCount);
 	void register(Board board);
 	void modify(Board board);
 	void remove(Long fno);

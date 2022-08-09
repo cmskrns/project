@@ -36,6 +36,7 @@
 			<result property="regDate" column="regDate"/>
 			<result property="updateDate" column="updateDate"/>
 			<result property="replyCnt" column="replyCnt"/>
+			<result property="viewCount" column="viewCount"/>
 			<collection property="attachList" column="fno" javaType="java.util.ArrayList"
 			ofType="com.jafa.model.BoardAttachVO" select="attachList"/>
 		</resultMap>
@@ -85,5 +86,9 @@
   	<!-- 댓글 증감 -->
   	<update id="updateReplyCnt">
   		update project_tbl set replyCnt = replyCnt + #{amount} where fno = #{fno}
+  	</update>
+  	
+  	<update id="addViewCount">
+  		update project_tbl set viewCount = viewCount +1 where fno = #{fno}
   	</update>
 	</mapper>

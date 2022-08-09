@@ -7,12 +7,12 @@
 			<h2>회원가입</h2>
 		</div>
 	</div>
-	<form action="${contextPath}/member/memberinsert" method="post">
+	<form action="${contextPath}/member/memberinsert" id="signForm" method="post">
 		<div class="form-group">
 			<label for="exampleFormControlInput1">아이디</label>
 			<div class="row">
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="exampleFormControlInput1" name="userId" placeholder="사용하실 아이디를 입력해 주세요">
+					<input type="text" class="form-control" id="exampleFormControlInput1" name="userId" placeholder="아이디 중복검사를 해주세요" readonly="readonly">
 				</div>
 				<div class="col-sm-4">
 					<button class="btn btn-primary idSelectBtn" type="button">중복검사</button>
@@ -21,35 +21,31 @@
 		</div> 
 		<div class="form-group">
 			<label for="exampleFormControlInput1">비밀번호</label>
-			<input type="password" class="form-control" id="exampleFormControlInput1" name="userPw" placeholder="사용하실 비밀번호를 입력해 주세요">
+			<input type="password" class="form-control" id="exampleFormControlInput1" name="userPw" placeholder="사용하실 비밀번호를 입력해 주세요" required>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">비밀번호 확인</label>
-			<input type="password" class="form-control" id="exampleFormControlInput1" name="confirmUserPw" placeholder="비밀번호를 한번더 입력해 주세요">
+			<input type="password" class="form-control" id="exampleFormControlInput1" name="confirmUserPw" placeholder="비밀번호를 한번더 입력해 주세요" required>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">이메일</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="userEmail" placeholder="이메일을 입력해 주세요">
+			<input type="text" class="form-control" id="exampleFormControlInput1" name="userEmail" required placeholder="이메일을 입력해 주세요">
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">이름</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="userName" placeholder="사용자 이름을 입력해 주세요">
+			<input type="text" class="form-control" id="exampleFormControlInput1" name="userName" required placeholder="사용자 이름을 입력해 주세요">
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">주소</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="addr" placeholder="주소를 입력해주세요">
+			<input type="text" class="form-control" id="exampleFormControlInput1" name="addr" required placeholder="주소를 입력해주세요">
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">전화번호</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="phoneNumber" placeholder="전화번호를 입력해주세요">
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlInput1">나이</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="age" placeholder="나이를 입력해주세요">
+			<input type="text" class="form-control" id="exampleFormControlInput1" name="phoneNumber" required placeholder="전화번호를 입력해주세요 EX)000-0000-0000">
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">생년월일</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="natalDay" placeholder="YYYY.MM.DD">
+			<input type="text" class="form-control" id="exampleFormControlInput1" name="natalDay" required placeholder="YYYY.MM.DD">
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">성별 : </label>

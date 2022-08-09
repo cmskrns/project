@@ -10,7 +10,6 @@
 		<result property="userEmail" column="userEmail"/>
 		<result property="addr" column="addr"/>
 		<result property="phoneNumber" column="phoneNumber"/>
-		<result property="age" column="age"/>
 		<result property="natalDay" column="natalDay"/>
 		<result property="gender" column="gender"/>
 		<result property="enabled" column="enabled"/>
@@ -25,7 +24,7 @@
 	</resultMap>
 	
 	<insert id="insert">
-		insert into member_tbl(userId,userPw,userName,userEmail,addr,phoneNumber,age,natalDay,gender) values (#{userId},#{userPw},#{userName},#{userEmail},#{addr},#{phoneNumber},#{age},#{natalDay},#{gender})
+		insert into member_tbl(userId,userPw,userName,userEmail,addr,phoneNumber,natalDay,gender) values (#{userId},#{userPw},#{userName},#{userEmail},#{addr},#{phoneNumber},#{natalDay},#{gender})
 	</insert>
 	
 	<insert id="authenticate">

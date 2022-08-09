@@ -26,8 +26,12 @@ public class UserBoardServiceIpml implements UserBoardService {
 		return mapper.getList(criteria);
 	}
 
+	@Transactional
 	@Override
-	public UserBoard get(Long bno) {
+	public UserBoard get(Long bno, boolean isAddCount) {
+		if (isAddCount) {
+			mapper.addViewCount(bno);
+		}
 		return mapper.get(bno);
 	}
 

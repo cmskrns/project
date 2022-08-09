@@ -6,7 +6,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,21 +60,36 @@ public class UserBoardController {
 	}
 	
 	@GetMapping("/get")
-	public String get(Long bno, Model model) {
-		UserBoard read = service.get(bno);
+	public String get(Long bno, Model model,
+			@CookieValue(required = false) Cookie viewCount, HttpServletRequest request, HttpServletResponse response) {
+		boolean isAddCount = false;
+		if (viewCount != null) {
+			String[] viewed = viewCount.getValue().split("/");
+			List<String> viewedList = Arrays.stream(viewed).collect(Collectors.toList());
+			if (!viewedList.contains(bno.toString())) {
+				viewCount.setValue(viewCount.getValue()+bno+"/");
+				response.addCookie(viewCount);
+				isAddCount = true;
+			}
+		}else {
+			Cookie cookie = new Cookie("viewCount", bno+"/");
+			cookie.setMaxAge(60*60*24);
+			response.addCookie(cookie);
+			isAddCount = true;
+		}
+		UserBoard read = service.get(bno,false);
 		if(read == null) throw new NotFoundBoardException();
-		model.addAttribute("board", service.get(bno));
+		model.addAttribute("board", service.get(bno, isAddCount));
 		return "userboard/get";
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/modify")
 	public String modifyForm(Long bno, UserBoard userBoard) {
-		UserBoard read = service.get(bno);
+		UserBoard read = service.get(bno, false);
 		if(read == null) throw new NotFoundBoardException();
 		return "userboard/modify";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modify")
 	public String modify(UserBoard userBoard, RedirectAttributes rttr) {
 		rttr.addAttribute("category", userBoard.getCategory());
@@ -75,7 +97,7 @@ public class UserBoardController {
 		return "redirect:list/"+ userBoard.getCategory();
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/remove")
 	public String remove(Long bno, String category, RedirectAttributes rttr) {
 		
@@ -105,13 +127,13 @@ public class UserBoardController {
 		
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public String registerForm() {
 		return "userboard/register";
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String register(UserBoard userBoard, RedirectAttributes rttr) {
 		rttr.addAttribute("category", userBoard.getCategory());

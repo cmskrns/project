@@ -20,6 +20,7 @@ public class UserBoard {
 	private String title;
 	private String content;
 	private String writer;
+	private Long viewCount;
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
 	

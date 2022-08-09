@@ -4,6 +4,7 @@
 
 <%-- get.js에 로그인한 사용자 값 전달 --%>
 <sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.memberVO" var="vo"/>
 	<sec:authentication property="principal.username" var="userName"/>
 	<script>let userName = "${userName}"</script>
 </sec:authorize>
@@ -49,7 +50,7 @@
 			    </div>
 			</div>
 		</div>
-		<c:if test="${userId eq board.writer}">
+		<c:if test="${vo.userId eq board.writer}">
 			<button class="btn btn-outline-primary btn-block modify">수정</button>
 			<button class="btn btn-outline-danger btn-block remove">삭제</button>
 		</c:if>

@@ -17,4 +17,5 @@ public interface UserBoardMapper {
 	int totalCount(@Param("cri") Criteria criteria);
 	
 	void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
+	void addViewCount(Long bno);
 }

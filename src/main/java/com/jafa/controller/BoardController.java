@@ -4,7 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,10 +60,27 @@ public class BoardController {
 	
 	//단일게시물
 	@GetMapping("/get")
-	public String get(Long fno,Model model) {
-		Board read = service.get(fno); 
+	public String get(Long fno,Model model,
+			@CookieValue(required = false) Cookie viewCount, HttpServletRequest request,
+			HttpServletResponse response) {
+		boolean isAddCount = false;
+		if (viewCount != null) {
+			String[] viewed = viewCount.getValue().split("/");
+			List<String> viewedList = Arrays.stream(viewed).collect(Collectors.toList());
+			if (!viewedList.contains(fno.toString())) {
+				viewCount.setValue(viewCount.getValue()+fno+"/");
+				response.addCookie(viewCount);
+				isAddCount = true;
+			}
+		}else {
+			Cookie cookie = new Cookie("viewCount", fno+"/");
+			cookie.setMaxAge(60*60*24);
+			response.addCookie(cookie);
+			isAddCount = true;
+		}
+		Board read = service.get(fno,false); 
 		if (read == null) throw new NotFoundBoardException();
-		model.addAttribute("board", service.get(fno));
+		model.addAttribute("board", service.get(fno,isAddCount));
 		return "board/get";
 	}
 	
@@ -64,7 +88,7 @@ public class BoardController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/modify")
 	public String modifyForm(Long fno,Board board) {
-		Board read = service.get(fno);
+		Board read = service.get(fno,false);
 		if (read == null) throw new NotFoundBoardException();
 		return "board/modify";
 	}

@@ -66,7 +66,9 @@
 							<fmt:parseDate var="regDate" value="${b.regDate }" pattern="yyyy-MM-dd'T'"/>
 							<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일"/>
 						</td>
-						<td style="width: 10%" class="text-center"></td>
+						<td style="width: 10%" class="text-center">
+							${b.viewCount}
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

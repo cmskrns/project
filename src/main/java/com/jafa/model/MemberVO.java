@@ -23,7 +23,6 @@ public class MemberVO {
 	private String userEmail;
 	private String addr;
 	private String phoneNumber;
-	private String age;
 	private String natalDay;
 	private GENDER gender;
 	private boolean enabled;

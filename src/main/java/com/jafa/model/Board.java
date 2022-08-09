@@ -25,6 +25,7 @@ public class Board {
 	private LocalDateTime regDate;
 	private LocalDateTime updateDate;
 	
+	private Long viewCount;
 	private int replyCnt;
 	private List<Reply> replyList; 
 	private List<BoardAttachVO> attachList; 

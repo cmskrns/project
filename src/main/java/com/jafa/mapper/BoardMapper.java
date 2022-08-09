@@ -22,6 +22,6 @@ public interface BoardMapper {
 	void updateReplyCnt(@Param("fno") Long fno,@Param("amount") int amount);
 	
 	List<BoardAttachVO> attachList(Long fno);
-	
+	void addViewCount(Long fno);
 	
 }

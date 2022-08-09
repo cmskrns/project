@@ -9,7 +9,7 @@ import com.jafa.model.UserBoardAttachVO;
 public interface UserBoardService {
 
 	List<UserBoard> getList(Criteria criteria);
-	UserBoard get(Long bno);
+	UserBoard get(Long bno, boolean isAddCount);
 	void register(UserBoard userBoard);
 	void modify(UserBoard userBoard);
 	void remove(Long bno);

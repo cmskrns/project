@@ -16,6 +16,9 @@
 <script>let contextPath = "${contextPath}"</script>
 <script src="${contextPath}/resources/js/reply.js"></script>
 <script src="${contextPath}/resources/js/userReply.js"></script>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.memberVO" var="vo"/>
+</sec:authorize>
 </head>
 <body>
 
@@ -48,14 +51,19 @@
 	  	</ul>
   	</div>
 	<ul class="navbar-nav">
+		<sec:authorize access="isAuthenticated()">
+			<li class="nav-item">
+				<a class="nav-link" href="">${vo.userName}님 어서오세요</a>
+			</li>
+		</sec:authorize>
 		<li class="nav-item">
 			<sec:authorize access="isAnonymous()">
 				<a class="nav-link" href="${contextPath }/projectLogin">로그인</a>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<form action="${contextPath}/projectLogout" method="post">
+				<form id="logoutForm" method="post">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<button>로그아웃</button>
+					<a class="btn btn-primary logout">로그아웃</a>
 				</form>
 			</sec:authorize>
 		</li>
@@ -63,8 +71,11 @@
 			<sec:authorize access="isAnonymous()">
 				<a class="nav-link" href="${contextPath }/member/memberinsert">회원가입</a>
 			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
+			<sec:authorize access="hasRole('ROLE_USER')">
 				<a class="nav-link" href="">마이페이지</a>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<a class="nav-link" href="">회원관리</a>
 			</sec:authorize>
 		</li>
 		<li class="nav-item">
@@ -72,3 +83,13 @@
 		</li>
 	</ul>
 </nav>
+
+<script>
+$(function(){
+	let logoutForm = $('#logoutForm')
+	$('#logoutForm a').on('click',function(e){
+		logoutForm.attr("action","${contextPath}/projectLogout");
+		logoutForm.submit();
+	})
+})
+</script>

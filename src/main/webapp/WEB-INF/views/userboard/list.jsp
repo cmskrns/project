@@ -29,9 +29,11 @@
 		    	</div>
 			</form>
 		</div>
+		<sec:authorize access="hasRole('ROLE_USER')">
 		<div class="col-md-3 text-right">
 			<a href="${contextPath}/userboard/register" class="btn btn-primary">작성</a>
 		</div>
+		</sec:authorize>
 	</div>
 	<!-- 게시물 -->
 	<div class="row">
@@ -52,6 +54,7 @@
 							<td style="width: 10%" class="text-center">${b.bno}</td>
 							<td style="width: 30%">
 								<a class="text-reset get" href="${b.bno}">
+									<img alt="" src="${contextPath}/userDisplay?fileName=${b.attachList[0].imageName}" style="width: 50px;">
 									${b.title}[${b.replyCnt}]
 								</a>
 							</td>
@@ -60,7 +63,9 @@
 								<fmt:parseDate var="regDate" value="${b.regDate }" pattern="yyyy-MM-dd'T'"/>
 								<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일"/>
 							</td>
-							<td style="width: 15%" class="text-center"></td>
+							<td style="width: 15%" class="text-center">
+								${b.viewCount}
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -28,6 +28,7 @@
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="writer" column="writer"/>
+		<result property="viewCount" column="viewCount"/>
 		<result property="regDate" column="regDate"/>
 		<result property="updateDate" column="updateDate"/>
 		<result property="replyCnt" column="replyCnt"/>
@@ -77,5 +78,9 @@
 	<!-- 댓글 증감 -->
   	<update id="updateReplyCnt">
   		update userboard_tbl set replyCnt = replyCnt + #{amount} where bno = #{bno}
+  	</update>
+  	
+  	<update id="addViewCount">
+  		update userboard_tbl set viewCount = viewCount +1 where bno = #{bno}
   	</update>
 </mapper>

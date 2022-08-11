@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,11 +19,9 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @MapperScan("com.jafa.mapper")
 @EnableScheduling
-@ImportResource(value = {
-		"classpath:config/security-context.xml"
-})
+@Import(SecurityConfig.class)
 public class RootConfig {
-
+	
 	@Bean
 	public DataSource dataSource() {
 		HikariConfig config = new HikariConfig();
@@ -39,11 +38,6 @@ public class RootConfig {
 		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSource());
 		return sessionFactoryBean.getObject();
-	}
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 	
 }

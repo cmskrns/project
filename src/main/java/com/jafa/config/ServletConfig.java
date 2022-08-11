@@ -24,7 +24,7 @@ public class ServletConfig implements WebMvcConfigurer{
 		viewResolver.setSuffix(".jsp");
 		registry.viewResolver(viewResolver);
 	}
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");

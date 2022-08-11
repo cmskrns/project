@@ -25,13 +25,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		if (roleNames.contains("ROLE_ADMIN")) {
 			System.out.println("관리자 로그인");
-			response.sendRedirect(request.getContextPath()+"/stratum/admin");
+			response.sendRedirect(request.getContextPath()+"/");
 			return;
 		}
 		
 		if (roleNames.contains("ROLE_USER")) {
 			System.out.println("유저 로그인");
-			response.sendRedirect(request.getContextPath()+"/stratum/user");
+			response.sendRedirect(request.getContextPath()+"/");
 			return;
 		}
 		response.sendRedirect(request.getContextPath()+"/");

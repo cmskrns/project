@@ -1,6 +1,7 @@
 package com.jafa.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,7 @@ public class MemberServiceIpml implements MemberService {
 		String pwEncoding = passwordEncoder.encode(memberVO.getUserPw());
 		memberVO.setUserPw(pwEncoding);
 		
+		
 		mapper.insert(memberVO);
 		
 		memberVO.setAuthList(new ArrayList<AuthVO>());
@@ -48,8 +50,13 @@ public class MemberServiceIpml implements MemberService {
 	}
 
 	@Override
-	public void remove(MemberVO memberVO) {
-		mapper.delete(memberVO);
+	public void remove(String userId) {
+		mapper.delete(userId);
+	}
+
+	@Override
+	public List<MemberVO> getList() {
+		return mapper.memberList();
 	}
 
 }

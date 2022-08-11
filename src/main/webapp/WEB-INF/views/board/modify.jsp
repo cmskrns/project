@@ -5,6 +5,7 @@
   <h2>게시글 수정</h2>
 </div>
 <form action="modify" method="post" id="modifyForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<div class="container">
 	<input type="hidden" name="fno" value="${board.fno}">
 	<input type="hidden" name="writer" value="${board.writer}">

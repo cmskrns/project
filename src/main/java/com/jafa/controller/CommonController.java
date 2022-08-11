@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jafa.model.MemberVO;
+
 @Controller
 public class CommonController {
 	
@@ -14,17 +16,4 @@ public class CommonController {
 		return "errorPage/accessError";
 	}
 	
-	@RequestMapping("/projectLogin")
-	public String loginForm(String error, Model model) {
-		if (error != null) {
-			System.out.println(error);
-			model.addAttribute("error", error);
-		}
-		return "member/projectLogin";
-	}
-	
-	@GetMapping("/projectLogout")
-	public String logout() {
-		return "member/projectLogout";
-	}
 }

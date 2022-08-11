@@ -1,67 +1,104 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container">
 	<div>
 		<div>
 			<h2>회원가입</h2>
 		</div>
 	</div>
-	<form action="${contextPath}/member/memberinsert" id="signForm" method="post">
+	<form:form action="${contextPath}/member/memberinsert" id="signForm" method="post" modelAttribute="memberVO">
 		<div class="form-group">
-			<label for="exampleFormControlInput1">아이디</label>
-			<div class="row">
-				<div class="col-sm-8">
-					<input type="text" class="form-control" id="exampleFormControlInput1" name="userId" placeholder="아이디 중복검사를 해주세요" readonly="readonly">
+			<label for="userId">아이디</label>
+				<div class="row">
+					<div class="col-sm-8">
+						<input type="text" class="form-control"  name="userId"  placeholder="아이디 중복검사를 해주세요" value='<c:out value="${memberVO.userId}"/>' readonly="readonly"/>
+					</div>
+					<div class="col-sm-4">
+						<button class="btn btn-primary idSelectBtn" type="button">중복검사</button>
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<button class="btn btn-primary idSelectBtn" type="button">중복검사</button>
-				</div>
-			</div>
+			<form:errors path="userId"/>
 		</div> 
 		<div class="form-group">
-			<label for="exampleFormControlInput1">비밀번호</label>
-			<input type="password" class="form-control" id="exampleFormControlInput1" name="userPw" placeholder="사용하실 비밀번호를 입력해 주세요" required>
+			<label for="userPw">비밀번호</label>
+			<div class="row">
+				<div class="col-sm-8">
+					<form:input type="password" class="form-control" path="userPw" placeholder="사용하실 비밀번호를 입력해 주세요"/>
+				</div>
+			</div>
+			<form:errors path="userPw"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">비밀번호 확인</label>
-			<input type="password" class="form-control" id="exampleFormControlInput1" name="confirmUserPw" placeholder="비밀번호를 한번더 입력해 주세요" required>
+			<label for="confirmUserPw">비밀번호 확인</label>
+			<div class="row">
+				<div class="col-sm-8">
+					<form:input type="password" class="form-control" path="confirmUserPw" placeholder="비밀번호를 한번더 입력해 주세요" />
+				</div>
+			</div>
+			<form:errors path="confirmUserPw"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">이메일</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="userEmail" required placeholder="이메일을 입력해 주세요">
+			<label for="userEmail">이메일</label>
+			<div class="row">
+				<div class="col-sm-8">
+					<form:input type="email" class="form-control"  path="userEmail"  placeholder="이메일을 입력해 주세요"/>
+				</div>
+			</div>
+			<form:errors path="userEmail"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">이름</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="userName" required placeholder="사용자 이름을 입력해 주세요">
+			<label for="userName">이름</label>
+			<div class="row">
+				<div class="col-sm-8">
+					<form:input type="text" class="form-control" path="userName"  placeholder="사용자 이름을 입력해 주세요"/>
+				</div>
+			</div>
+			<form:errors path="userName"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">주소</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="addr" required placeholder="주소를 입력해주세요">
+			<label for="addr">주소</label>
+			<div class="row">
+				<div class="col-sm-8">
+					<form:input type="text" class="form-control" path="addr"  placeholder="주소를 입력해주세요"/>
+				</div>
+			</div>
+			<form:errors path="addr"/>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">전화번호</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="phoneNumber" required placeholder="전화번호를 입력해주세요 EX)000-0000-0000">
+			<div class="row">
+				<div class="col-sm-8">
+					<form:input type="text" class="form-control"  path="phoneNumber"  placeholder="전화번호를 입력해주세요 EX)000-0000-0000"/>
+				</div>
+			</div>
+			<form:errors path="phoneNumber"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">생년월일</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="natalDay" required placeholder="YYYY.MM.DD">
+			<label for="natalDay">생년월일</label>
+			<div class="row">
+				<div class="col-sm-8">
+					<form:input type="date" class="form-control" path="natalDay"  placeholder="YYYY.MM.DD"/>
+				</div>
+			</div>
+			<form:errors path="natalDay"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">성별 : </label>
+			<label for="exampleFormControlInput1">성별 : </label> 
 			<div class="form-check-inline">
-		      	<label class="form-check-label" for="radio1">
-		       		<input type="radio" class="form-check-input" id="radio1" name="gender"  value="M" checked>남성
+		      	<label class="form-check-label" >
+		    		<form:radiobutton path="gender" value="M"/> 남성   		
 		       	</label>
 		    </div>
 		    <div class="form-check-inline">
-		    	<label class="form-check-label" for="radio2">
-		       		<input type="radio" class="form-check-input" id="radio2" name="gender" value="W" >여성
+		    	<label class="form-check-label">
+		       		<form:radiobutton path="gender" value="W"/> 여성
 		    	</label>
 		    </div>
 		</div>
 		<button class="btn btn-primary btn-block">회원가입</button>
-	</form>
+	</form:form>
 </div>
 <div class="fade modal" id="select_id">
     <div class="modal-dialog">

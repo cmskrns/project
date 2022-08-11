@@ -6,6 +6,7 @@
 		<id property="userId" column="userId"/>
 		<result property="userId" column="userId"/>
 		<result property="userPw" column="userPw"/>
+		<result property="confirmUserPw" column="confirmUserPw"/>
 		<result property="userName" column="userName"/>
 		<result property="userEmail" column="userEmail"/>
 		<result property="addr" column="addr"/>
@@ -23,9 +24,17 @@
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
+	<select id="memberList" resultMap="memberMap">
+		select * from member_tbl
+	</select>
+	
 	<insert id="insert">
 		insert into member_tbl(userId,userPw,userName,userEmail,addr,phoneNumber,natalDay,gender) values (#{userId},#{userPw},#{userName},#{userEmail},#{addr},#{phoneNumber},#{natalDay},#{gender})
 	</insert>
+	
+	<delete id="delete">
+		delete from member_tbl where userId = #{userId}
+	</delete>
 	
 	<insert id="authenticate">
 		insert into member_auth value (#{userId},#{auth})

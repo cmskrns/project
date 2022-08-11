@@ -2,6 +2,9 @@ package com.jafa.mapper;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,10 +17,17 @@ public class MemberMapperTest extends AppTest{
 	MemberMapper mapper;
 	
 	@Test
+	@Ignore
 	public void test() {
 		
 		MemberVO vo = mapper.read("admin");
 		vo.getAuthList().forEach(authVO ->System.out.println(authVO));
+	}
+	
+	@Test
+	public void ListTest() {
+		List<MemberVO> list = mapper.memberList();
+		assertEquals(1,list.size());
 	}
 
 }

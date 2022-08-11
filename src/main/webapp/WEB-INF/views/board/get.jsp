@@ -14,6 +14,7 @@
 <script src="${contextPath}/resources/js/get.js"></script>
 <div class="container">
 	<form id="getForm">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<div class="getData">
 			<input type="hidden"name="page" id="page" value="${param.page}">
 			<input type="hidden"name="type" id="type" value="${param.type}">

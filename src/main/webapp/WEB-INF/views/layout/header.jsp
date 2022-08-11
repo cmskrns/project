@@ -58,7 +58,7 @@
 		</sec:authorize>
 		<li class="nav-item">
 			<sec:authorize access="isAnonymous()">
-				<a class="nav-link" href="${contextPath }/projectLogin">로그인</a>
+				<a class="nav-link" href="${contextPath }/member/projectLogin">로그인</a>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<form id="logoutForm" method="post">
@@ -75,7 +75,7 @@
 				<a class="nav-link" href="">마이페이지</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<a class="nav-link" href="">회원관리</a>
+				<a class="nav-link" href="${contextPath }/member/memberList">회원관리</a>
 			</sec:authorize>
 		</li>
 		<li class="nav-item">
@@ -88,7 +88,7 @@
 $(function(){
 	let logoutForm = $('#logoutForm')
 	$('#logoutForm a').on('click',function(e){
-		logoutForm.attr("action","${contextPath}/projectLogout");
+		logoutForm.attr("action","${contextPath}/member/projectLogout");
 		logoutForm.submit();
 	})
 })

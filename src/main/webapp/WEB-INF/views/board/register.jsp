@@ -5,6 +5,7 @@
   <h2>게시글 작성</h2>
 </div>
 <form action="register" method="post" id="registerForm">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<div class="container">
 		<div class="form-group">
 			<label for="exampleFormControlInput1">작성자</label>

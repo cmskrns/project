@@ -33,6 +33,7 @@
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<div class="col-md-3 text-right">
 				<a href="${contextPath}/board/register" class="btn btn-primary">작성</a>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			</div>
 		</sec:authorize>
 	</div>

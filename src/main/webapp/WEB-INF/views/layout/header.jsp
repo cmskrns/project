@@ -72,7 +72,7 @@
 				<a class="nav-link" href="${contextPath }/member/memberinsert">회원가입</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_USER')">
-				<a class="nav-link" href="">마이페이지</a>
+				<a class="nav-link" href="${contextPath}/member/myPage/${vo.userId}">마이페이지</a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<a class="nav-link" href="${contextPath }/member/memberList">회원관리</a>

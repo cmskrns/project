@@ -2,6 +2,7 @@ package com.jafa.service;
 
 import java.util.List;
 
+import com.jafa.model.AuthVO;
 import com.jafa.model.MemberVO;
 
 public interface MemberService {
@@ -11,4 +12,5 @@ public interface MemberService {
 	void modify(MemberVO memberVO);
 	void remove(String userId);
 	MemberVO findById(String userId);
+	
 }

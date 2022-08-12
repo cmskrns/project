@@ -36,6 +36,19 @@
 		delete from member_tbl where userId = #{userId}
 	</delete>
 	
+	<update id="update">
+		update member_tbl set
+		userPw = #{userPw},
+		userName = #{userName},
+		userEmail = #{userEmail},
+		addr = #{addr},
+		phoneNumber = #{phoneNumber},
+		natalDay = #{natalDay},
+		gender = #{gender},
+		updateDate = now()
+		where userId = #{userId}
+	</update>
+	
 	<insert id="authenticate">
 		insert into member_auth value (#{userId},#{auth})
 	</insert>

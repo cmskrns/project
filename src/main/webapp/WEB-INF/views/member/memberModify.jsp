@@ -8,15 +8,12 @@
 			<h2>회원가입</h2>
 		</div>
 	</div>
-	<form:form action="${contextPath}/member/memberinsert" id="signForm" method="post" modelAttribute="memberVO">
+	<form:form action="${contextPath}/member/memberModify" id="modifyForm" method="post" modelAttribute="memberVO">
 		<div class="form-group">
 			<label for="userId">아이디</label>
 				<div class="row">
 					<div class="col-sm-8">
 						<input type="text" class="form-control"  name="userId"  placeholder="아이디 중복검사를 해주세요" value='<c:out value="${memberVO.userId}"/>' readonly="readonly"/>
-					</div>
-					<div class="col-sm-4">
-						<button class="btn btn-primary idSelectBtn" type="button">중복검사</button>
 					</div>
 				</div>
 			<form:errors path="userId" style="color:red;"/>
@@ -97,58 +94,15 @@
 		    	</label>
 		    </div>
 		</div>
-		<button class="btn btn-primary btn-block">회원가입</button>
+		<button class="btn btn-primary btn-block">수정하기</button>
 	</form:form>
 </div>
-<div class="fade modal" id="select_id">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">아이디 중복 확인</h4>
-          <button type="button" class="close" data-dismiss="modal">×</button>
-        </div>
-        <div class="modal-body">
-        	<div class="form-group">
-        		<input type="text" class="userId form-control">
-        	</div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary findId">조회</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-</div>
+
 
 <%@ include file="/WEB-INF/views/layout/footer.jsp" %>
 
 <script>
 $(function(){
-	$('.idSelectBtn').on('click',function(){
-		$('#select_id').find('.userId').val('');
-		$('#select_id').modal('show');
-	});
 	
-	$('.findId').on('click',function(){
-		let userId = $('#select_id').find('.userId').val();
-		if(userId.trim()=='' || userId==null) {
-			alert('아이디를 입력해주세요')
-			return; 
-		}
-		let url = contextPath + "/member/idCheck/" + userId;
-		$.getJSON(url,function(result){
-			if(result){ // 사용가능
-				alert('사용가능한 아이디 입니다.')
-				$('#signForm').find('input[name="userId"]').val(userId);
-				$('#select_id').modal('hide');
-				
-			} else { // 사용 불가능
-				alert('이미 등록된 아이디 입니다 다른 아이디를 사용해주세요')
-			}			
-		}).fail(function(){
-			alert('통신에러')
-		});
-		
-	})
 })
 </script>

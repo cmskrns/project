@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jafa.mapper.AuthMapper;
 import com.jafa.mapper.MemberMapper;
 import com.jafa.model.AuthVO;
 import com.jafa.model.MemberVO;
@@ -21,6 +22,9 @@ public class MemberServiceIpml implements MemberService {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	AuthMapper authMapper;
 	
 	@Transactional
 	@Override
@@ -43,15 +47,21 @@ public class MemberServiceIpml implements MemberService {
 		return mapper.findByUserId(userId);
 	}
 
+	@Transactional
 	@Override
 	public void modify(MemberVO memberVO) {
+		String pwEncoding = passwordEncoder.encode(memberVO.getUserPw());
+		memberVO.setUserPw(pwEncoding);
 		mapper.update(memberVO);
 		
 	}
 
+	@Transactional
 	@Override
 	public void remove(String userId) {
-		mapper.delete(userId);
+		
+		 authMapper.delete(userId);
+		 mapper.delete(userId);
 	}
 
 	@Override

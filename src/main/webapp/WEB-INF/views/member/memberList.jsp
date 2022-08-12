@@ -48,6 +48,7 @@
 								<c:otherwise>
 									<form id="memberRemove">
 										<a class="btn btn-outline-danger">강퇴</a>
+										<input type="hidden" name="userId" value="${b.userId}">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									</form>
 								</c:otherwise>

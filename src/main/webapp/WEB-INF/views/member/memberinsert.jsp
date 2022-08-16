@@ -11,14 +11,14 @@
 	<form:form action="${contextPath}/member/memberinsert" id="signForm" method="post" modelAttribute="memberVO">
 		<div class="form-group">
 			<label for="userId">아이디</label>
-				<div class="row">
-					<div class="col-sm-8">
-						<input type="text" class="form-control"  name="userId"  placeholder="아이디 중복검사를 해주세요" value='<c:out value="${memberVO.userId}"/>' readonly="readonly"/>
-					</div>
-					<div class="col-sm-4">
-						<button class="btn btn-primary idSelectBtn" type="button">중복검사</button>
-					</div>
+			<div class="row">
+				<div class="col-sm-8">
+					<input type="text" class="form-control"  name="userId"  placeholder="아이디 중복검사를 해주세요" value='<c:out value="${memberVO.userId}"/>' readonly="readonly"/>
 				</div>
+				<div class="col-sm-4">
+					<button class="btn btn-primary idSelectBtn" type="button">중복검사</button>
+				</div>
+			</div>
 			<form:errors path="userId" style="color:red;"/>
 		</div> 
 		<div class="form-group">

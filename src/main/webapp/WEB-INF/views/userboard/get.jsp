@@ -158,14 +158,15 @@ $(function(){
 		getForm.attr("action","modify");
 		getForm.submit();
 	})
+	
 	$('#getForm .remove').on('click',function(e){
 		e.preventDefault();
 		if (tagLi.children().length != 0) {
 			alert("댓글이 존재합니다")
-			
 		}else {
+			getForm.append('<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">')
 			getForm.attr("method","post");
-			getForm.attr("action","remove");
+			getForm.attr("action",contextPath+"/userboard/remove");
 			getForm.submit();
 			
 		}

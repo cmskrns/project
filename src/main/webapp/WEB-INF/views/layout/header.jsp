@@ -78,9 +78,6 @@
 				<a class="nav-link" href="${contextPath }/member/memberList">회원관리</a>
 			</sec:authorize>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link">한국어/영어</a>
-		</li>
 	</ul>
 </nav>
 

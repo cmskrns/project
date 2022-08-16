@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jafa.exception.NotFoundBoardException;
 import com.jafa.mapper.UserBoardMapper;
 import com.jafa.model.Criteria;
+import com.jafa.model.MemberVO;
 import com.jafa.model.PageMaker;
 import com.jafa.model.UserBoard;
 import com.jafa.model.UserBoardAttachVO;
@@ -91,7 +94,10 @@ public class UserBoardController {
 	}
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modify")
-	public String modify(UserBoard userBoard, RedirectAttributes rttr) {
+	public String modify(@Valid UserBoard userBoard,Errors errors ,RedirectAttributes rttr) {
+		if (errors.hasErrors()) {
+			return "userboard/modify";
+		}
 		rttr.addAttribute("category", userBoard.getCategory());
 		service.modify(userBoard);
 		return "redirect:list/"+ userBoard.getCategory();
@@ -100,7 +106,6 @@ public class UserBoardController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/remove")
 	public String remove(Long bno, String category, RedirectAttributes rttr) {
-		
 		List<UserBoardAttachVO> attachList = service.getAttachList(bno);
 		deleteFiles(attachList);
 		rttr.addAttribute("category", category);
@@ -129,16 +134,19 @@ public class UserBoardController {
 
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
-	public String registerForm() {
+	public String registerForm(UserBoard userBoard) {
 		return "userboard/register";
 	}
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
-	public String register(UserBoard userBoard, RedirectAttributes rttr) {
+	public String register(@Valid UserBoard userBoard,Errors errors,RedirectAttributes rttr) {
+		if (errors.hasErrors()) {
+			return "userboard/register";
+		}
 		rttr.addAttribute("category", userBoard.getCategory());
 		service.register(userBoard);
-		rttr.addAttribute("board", userBoard);
+//		rttr.addAttribute("board", userBoard); 이거 왜 넣었지??..
 		return "redirect:list/" + userBoard.getCategory();
 	}
 	

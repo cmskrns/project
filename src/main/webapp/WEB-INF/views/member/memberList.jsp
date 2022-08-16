@@ -7,6 +7,29 @@
 			<h2>회원 목록</h2>
 		</div>
 	</div>
+	<!-- 검색창 -->
+	<div class="row mb-3">
+		<div class="col-md-9">
+			<form id="listForm">
+				<div class="input-group">
+		        	<div class="input-group-prepend">
+		            	<select name="type" id="type">
+		            		<option value="">검색종류</option>
+							<option value="I" ${pageMaker.criteria.type eq 'I' ? 'selected' : ''}>아이디</option>
+							<option value="A" ${pageMaker.criteria.type eq 'A' ? 'selected' : ''}>주소</option>
+							<option value="N" ${pageMaker.criteria.type eq 'N' ? 'selected' : ''}>이름</option>
+		           		</select>
+		        	</div>
+		        	<div class="input-group-prepend mx-2">
+		        		<input type="text" name="keyword" class="form-control" value="${pageMaker.criteria.keyword}" placeholder="검색어를 입력해 주세요">
+		        	</div>
+		        	<div class="input-group-append">
+		            	<button class="btn btn-success searchBtn">검색</button>
+		        	</div>
+		    	</div>
+			</form>
+		</div>
+	</div>		
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table table-hover table-bordered">
@@ -60,15 +83,54 @@
 			</table>
 		</div>
 	</div>
+	<!-- 페이징처리 -->
+	<div class="pagination d-flex justify-content-center" style="margin-bottom: 20px">
+		<c:if test="${pageMaker.prev }">
+			<li class="page-item"><a class="page-link" href="${pageMaker.startPage-1}">이전</a></li>
+		</c:if>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+			<li class="page-item ${param.page == pageNum ? 'active': ' ' }">
+				<a class="page-link" href="${pageNum}">${pageNum}</a>
+			</li>
+		</c:forEach>
+		<c:if test="${pageMaker.next }">
+			<li class="page-item"><a class="page-link" href="${pageMaker.endPage+1 }">다음</a></li>
+		</c:if>
+	</div>
+	<div class="listData">
+		<input type="hidden" name="userId" id="userId" value="">
+		<input type="hidden" name="page" id="page" value="${pageMaker.criteria.page}">
+		<input type="hidden" name="type" id="type" value="${pageMaker.criteria.type}">
+		<input type="hidden" name="keyword" id="keyword" value="${pageMaker.criteria.keyword}">
+	</div> 
 </div>
 <%@ include file="/WEB-INF/views/layout/footer.jsp" %>
 <script>
 $(function(){
+	let listForm = $('#listForm');
 	let memberRemove = $("#memberRemove")
+	$('.pagination a').on('click',function(e){
+		e.preventDefault();
+		$('.listData').find('#page').val($(this).attr('href'));
+		
+		if (listForm.find('input[name="keyword"]').val()=='') {
+			listForm.empty();
+		}
+		listForm.append($('#page'));
+		listForm.submit();
+	});
+	
 	$('#memberRemove a').on('click',function(e){
 		memberRemove.attr("method","post");
-		memberRemove.attr("action","${contextPath}/member/memberRemove");
+		memberRemove.attr("action","${contextPath}/member/adminRemove");
 		memberRemove.submit();
+	})
+	
+	$('.searchBtn').on('click',function(e){
+		if ($('#type').val()=='') {
+			alert('검색종류를 선택해주세요!')
+			e.preventDefault();
+		}
 	})
 	
 })

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jafa.mapper.AuthMapper;
 import com.jafa.mapper.MemberMapper;
 import com.jafa.model.AuthVO;
+import com.jafa.model.Criteria;
 import com.jafa.model.MemberVO;
 
 @Service
@@ -59,14 +60,18 @@ public class MemberServiceIpml implements MemberService {
 	@Transactional
 	@Override
 	public void remove(String userId) {
-		
 		 authMapper.delete(userId);
 		 mapper.delete(userId);
 	}
 
 	@Override
-	public List<MemberVO> getList() {
-		return mapper.memberList();
+	public List<MemberVO> getList(Criteria criteria) {
+		return mapper.memberList(criteria);
+	}
+
+	@Override
+	public int totalCount(Criteria criteria) {
+		return mapper.totalCount(criteria);
 	}
 
 }

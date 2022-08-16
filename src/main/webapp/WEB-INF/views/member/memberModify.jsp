@@ -5,7 +5,7 @@
 <div class="container">
 	<div>
 		<div>
-			<h2>회원가입</h2>
+			<h2>회원수정</h2>
 		</div>
 	</div>
 	<form:form action="${contextPath}/member/memberModify" id="modifyForm" method="post" modelAttribute="memberVO">

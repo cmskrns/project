@@ -35,7 +35,7 @@
 			    	<c:forEach items="${board.attachList}" var="b">
 							<img alt="" src="${contextPath}/display?fileName=${b.imageName}" style="width: 230px;">
 			    	</c:forEach>
-			    </div>
+			    </div><br>
 				<div>
 				    <p>업종 : ${board.category} </p>
 				    <p>주소 : ${board.addr} </p>

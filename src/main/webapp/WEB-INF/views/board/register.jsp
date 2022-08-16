@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container" style="text-align: center; padding-top: 20px">
   <h2>게시글 작성</h2>
 </div>
-<form action="register" method="post" id="registerForm">
+<form:form action="register" method="post" id="registerForm" modelAttribute="board">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<div class="container">
 		<div class="form-group">
@@ -12,8 +13,9 @@
 			<input type="text" class="form-control" id="exampleFormControlInput1" name="writer" value="관리자" placeholder="관리자" readonly="readonly">
 		</div> 
 		<div class="form-group">
-			<label for="exampleFormControlInput1">제목</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="rtName">
+			<label for="rtName">제목</label>
+			<form:input type="text" class="form-control" path="rtName" placeholder="제목을 입력해주세요"/>
+			<form:errors path="rtName"/>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">업종 : </label>
@@ -34,20 +36,24 @@
 	    	</div>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">주소</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="addr">
+			<label for="addr">주소</label>
+			<form:input type="text" class="form-control" path="addr" placeholder="가게 주소를 입력하세요"/>
+			<form:errors path="addr"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">평균가격</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="avgPrice" >
+			<label for="avgPrice">평균가격</label>
+			<form:input type="text" class="form-control" path="avgPrice" placeholder="평균가격을 입력하세요" />
+			<form:errors path="avgPrice"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">평균 배달시간</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="avgDelivery" >
+			<label for="avgDelivery">평균 배달시간</label>
+			<form:input type="text" class="form-control" path="avgDelivery" placeholder="평균 배달시간을 입력하세요 EX)00분"/>
+			<form:errors path="avgDelivery"/>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlTextarea1">내용</label>
-			<textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="10"></textarea>          
+			<label for="description">내용</label>
+			<form:textarea class="form-control" path="description" rows="10" placeholder="내용을 입력하세요"/>          
+			<form:errors path="description"/>
 		</div>
 		<div class="row my-3">
 			<div class="col-lg-12">
@@ -68,7 +74,7 @@
 		</div>
 	 	<button class="btn btn-primary btn-block">등록</button>
 	</div>
-</form>
+</form:form>
 
 <script>
 	let regex = new RegExp("(.*?)\.(exe|sh|js|alz|txt)$");

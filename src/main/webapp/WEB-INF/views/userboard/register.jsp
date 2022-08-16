@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container" style="text-align: center; padding-top: 20px">
   <h2>게시글 작성</h2>
 </div>
-<form action="register" method="post" id="registerForm">
+<form:form action="register" method="post" id="registerForm" modelAttribute="userBoard">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<div class="container">
 		<div class="form-group">
 			<label for="exampleFormControlInput1">작성자</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="writer">
+			<input type="text" class="form-control" id="exampleFormControlInput1" name="writer" value="${vo.userId}" readonly="readonly">
 		</div> 
 		<div class="form-group">
-			<label for="exampleFormControlInput1">제목</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" name="title">
+			<label for="title">제목</label>
+			<form:input type="text" class="form-control" path="title"/>
+			<form:errors path="title"/>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">카테고리 : </label>
@@ -33,8 +36,9 @@
 	    	</div>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlTextarea1">내용</label>
-			<textarea class="form-control" id="exampleFormControlTextarea1" name="content" rows="10"></textarea>          
+			<label for="content">내용</label>
+			<form:textarea class="form-control" path="content" rows="10"/>
+			<form:errors path="content"/>          
 		</div>
 		<div class="row my-3">
 			<div class="col-lg-12">
@@ -55,7 +59,7 @@
 		</div>
 	 	<button class="btn btn-primary btn-block">등록</button>
 	</div>
-</form>
+</form:form>
 
 <script>
 let regex = new RegExp("(.*?)\.(exe|sh|js|alz)$");

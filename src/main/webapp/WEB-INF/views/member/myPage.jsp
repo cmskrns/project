@@ -15,7 +15,6 @@
 				</div>
 				<div>
 					<input type="hidden" name="userId" value="${member.userId}">
-					<input type="hidden" name="userPw" value="${member.userPw}">
 					<input type="hidden" name="userName" value="${member.userName}">
 					<input type="hidden" name="userEmail" value="${member.userEmail}">
 					<input type="hidden" name="addr" value="${member.addr}">

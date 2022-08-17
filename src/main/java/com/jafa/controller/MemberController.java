@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -38,6 +39,8 @@ public class MemberController {
 	@Autowired
 	HttpSession httpSession; 
 	
+	
+	//로그인,로그아웃
 	@RequestMapping("/projectLogin")
 	public String loginForm(MemberVO memberVO, String error, Model model) {
 		if (error != null) {
@@ -52,6 +55,8 @@ public class MemberController {
 		return "member/projectLogout";
 	}
 	
+	//회원리스트
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/memberList")
 	public String memberList(Criteria criteria, Model model) {
 		PageMaker pageMaker = new PageMaker(criteria, mapper.totalCount(criteria));
@@ -60,6 +65,7 @@ public class MemberController {
 		return "member/memberList";
 	}
 
+	//회원가입
 	@GetMapping("/memberinsert")
 	public String join(MemberVO member) {
 		return "member/memberinsert";
@@ -74,12 +80,16 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//회원강퇴
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping("/adminRemove")
 	public String adminRemove(String userId) {
 		service.remove(userId);
 		return "redirect:memberList";
 	}
 	
+	//회원탈퇴
+	@PreAuthorize("userId == principal.username")
 	@PostMapping("/memberRemove")
 	public String memberRemove(String userId, HttpServletRequest request,HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
@@ -95,13 +105,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
+	//회원페이지
 	@GetMapping("/myPage/{userId}")
 	public String myPage(@PathVariable String userId,Model model) {
 		model.addAttribute("member", service.findById(userId));
 		return "member/myPage";
 	}
 	
+	//회원수정
 	@GetMapping("memberModify")
 	public String modifyForm(MemberVO memberVO) {
 		return "member/memberModify";

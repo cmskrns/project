@@ -13,20 +13,6 @@
 </sec:authorize>
 <script src="${contextPath}/resources/js/userGet.js"></script>
 <div class="container">
-	<div class="row my-5">
-		<div class="col-lg-12">
-			<div class="card">
-				<div class="card-header">
-					<h4>첨부된 파일</h4>
-				</div>
-				<div class="card-body">
-					<div class="uploadResult">
-						<ul class="list-group"></ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<form id="getForm">
 		<div class="getData">
 			<input type="hidden"name="page" id="page" value="${param.page}">
@@ -40,14 +26,35 @@
 			<input type="hidden" name="writer" value="${board.writer}">
 			<input type="hidden" name="content" value="${board.content}">
 		</div>
+		<br>
 		<div class="media">
 			<div class="media-body">
-				<h4>${board.title}</h4>
+				<h2>${board.title}</h2>
+				<h5>작성자 : ${board.writer}</h5>
+				<p>
+					작성일 :
+					<fmt:parseDate var="regDate" value="${board.regDate }" pattern="yyyy-MM-dd'T'"/>
+					<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일"/>
+				</p>
+				<p>카테고리 : ${board.category} </p>
+				<hr>
 				<div>
-				    <p>카테고리 : ${board.category} </p>
-				    <p>작성자 : ${board.writer} </p>
 				    <p>내용 : ${board.content} </p>
 			    </div>
+			    <div class="row my-5">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>첨부된 파일</h4>
+							</div>
+							<div class="card-body">
+								<div class="uploadResult">
+									<ul class="list-group"></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<c:if test="${vo.userId eq board.writer}">

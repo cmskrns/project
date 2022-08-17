@@ -16,11 +16,11 @@ public class CustomUserDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		System.out.println(username);
+		System.out.println("???"+username);
 		
 		MemberVO vo = memberMapper.read(username);
 		
-		System.out.println(vo);
+		System.out.println("??"+vo);
 		
 		return vo == null ? null : new CustomUser(vo);
 	}

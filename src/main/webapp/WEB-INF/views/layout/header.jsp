@@ -23,62 +23,66 @@
 <body>
 
 <nav class="navbar navbar-expand-sm bg-light">
-  <h3><a class="navbar-brand" href="${contextPath }">G.C.R</a></h3>
-  <div class="container">
-	  <ul class="navbar-nav">
-	    <li class="nav-item">
-	      <a class="nav-link" href="#">소개</a>
-	    </li>
-	    <li class="nav-item dropdown">
-		    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">업종</a>
-		    <div class="dropdown-menu">
-		      <a class="dropdown-item" href="${contextPath }/board/list/K-Food">한식</a>
-		      <a class="dropdown-item" href="${contextPath }/board/list/C-Food">중식</a>
-		      <a class="dropdown-item" href="${contextPath }/board/list/J-Food">일식</a>
-		      <a class="dropdown-item" href="#">양식</a>
-		      <a class="dropdown-item" href="#">분식</a>
-		      <a class="dropdown-item" href="#">기타</a>
-		    </div>
-	  	</li>
-	    <li class="nav-item dropdown">
-		   	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">유저게시판</a>
-		    <div class="dropdown-menu">
-		      <a class="dropdown-item" href="${contextPath }/userboard/list/Free">자유게시판</a>
-		      <a class="dropdown-item" href="${contextPath }/userboard/list/Tip">팁 게시판</a>
-		      <a class="dropdown-item" href="${contextPath }/userboard/list/Recommend">추천합니다</a>
-		    </div>
-	  	</li>
-	  	</ul>
-  	</div>
-	<ul class="navbar-nav">
-		<sec:authorize access="isAuthenticated()">
-			<li class="nav-item">
-				<a class="nav-link" href="">${vo.userName}님 어서오세요</a>
+	<div class="container">
+		<h3><a class="navbar-brand" href="${contextPath }"><img src="${contextPath}/resources/img/Free_Sample_By_Wix.jpg" style="width: 130px;"></a></h3>
+  		<ul class="nav nav-pills">
+		    <li class="nav-item">
+				<a class="nav-link" href="${contextPath }/board/list/K-Food">한식</a>
 			</li>
-		</sec:authorize>
-		<li class="nav-item">
-			<sec:authorize access="isAnonymous()">
-				<a class="nav-link" href="${contextPath }/member/projectLogin">로그인</a>
-			</sec:authorize>
+			<li class="nav-item">
+				<a class="nav-link" href="${contextPath }/board/list/C-Food">중식</a>
+			</li>
+			<li class="nav-item">
+			    <a class="nav-link" href="${contextPath }/board/list/J-Food">일식</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">양식</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">분식</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">기타</a>
+		  	</li>
+		    <li class="nav-item dropdown">
+			   	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">유저게시판</a>
+			    <div class="dropdown-menu">
+			      <a class="dropdown-item" href="${contextPath }/userboard/list/Free">자유게시판</a>
+			      <a class="dropdown-item" href="${contextPath }/userboard/list/Tip">팁 게시판</a>
+			      <a class="dropdown-item" href="${contextPath }/userboard/list/Recommend">추천합니다</a>
+			    </div>
+		  	</li>
+	  	</ul>
+		<ul class="navbar-nav">
 			<sec:authorize access="isAuthenticated()">
-				<form id="logoutForm" method="post">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<a class="btn btn-primary logout">로그아웃</a>
-				</form>
+				<li class="nav-item">
+					<a class="nav-link" href="">${vo.userName}님 어서오세요</a>
+				</li>
 			</sec:authorize>
-		</li>
-		<li class="nav-item">
-			<sec:authorize access="isAnonymous()">
-				<a class="nav-link" href="${contextPath }/member/memberinsert">회원가입</a>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_USER')">
-				<a class="nav-link" href="${contextPath}/member/myPage/${vo.userId}">마이페이지</a>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<a class="nav-link" href="${contextPath }/member/memberList">회원관리</a>
-			</sec:authorize>
-		</li>
-	</ul>
+			<li class="nav-item">
+				<sec:authorize access="isAnonymous()">
+					<a class="nav-link" href="${contextPath }/member/projectLogin">로그인</a>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<form id="logoutForm" method="post">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+						<a class="btn btn-primary logout">로그아웃</a>
+					</form>
+				</sec:authorize>
+			</li>
+			<li class="nav-item">
+				<sec:authorize access="isAnonymous()">
+					<a class="nav-link" href="${contextPath }/member/memberinsert">회원가입</a>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_USER')">
+					<a class="nav-link" href="${contextPath}/member/myPage/${vo.userId}">마이페이지</a>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<a class="nav-link" href="${contextPath }/member/memberList">회원관리</a>
+				</sec:authorize>
+			</li>
+		</ul>
+	</div>
 </nav>
 
 <script>

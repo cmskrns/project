@@ -52,6 +52,7 @@
 							<input type="file" name="uploadFile" multiple="multiple">
 						</div>
 						<div class="uploadResult">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<ul class="list-group"></ul>
 						</div>
 					</div>
@@ -146,18 +147,24 @@ $(function(){
 	
 	let modifyForm = $('#modifyForm');
 	let modifyBtn = $('#modifyForm button');
-	
+	let userId = "${vo.userId}"
+	let boardWriter = "${userBoard.writer}"
 	modifyBtn.on('click',function(e){
-		e.preventDefault();
-		let str = "";
-		$('.uploadResult ul li').each(function(i,obj){
-			let jobj = $(obj);
-			str+="<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data('filename')+"'>"
-			str+="<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data('uuid')+"'>"
-			str+="<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>"
-			str+="<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>"
-		})
-		modifyForm.append(str).submit();
+		if (userId != boardWriter) {
+			alert("작성자만 수정이 가능합니다")
+			e.preventDefault();
+		}else{
+			e.preventDefault();
+			let str = "";
+			$('.uploadResult ul li').each(function(i,obj){
+				let jobj = $(obj);
+				str+="<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data('filename')+"'>"
+				str+="<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data('uuid')+"'>"
+				str+="<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data('path')+"'>"
+				str+="<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data('type')+"'>"
+			})
+			modifyForm.append(str).submit();
+		}
 	})
 	
 	//업로드 파일삭제

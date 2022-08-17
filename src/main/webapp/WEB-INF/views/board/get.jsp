@@ -28,9 +28,17 @@
 		<input type="hidden" name="avgPrice" value="${board.avgPrice}">
 		<input type="hidden" name="avgDelivery" value="${board.avgDelivery}">
 		<input type="hidden" name="description" value="${board.description}">
+		<br>
 		<div class="media">
 			<div class="media-body">
-				<h4>${board.rtName}</h4>
+				<h2>${board.rtName}</h2>
+				<h5>작성자 : ${board.writer}</h5>
+				<p>
+					작성일 :
+					<fmt:parseDate var="regDate" value="${board.regDate }" pattern="yyyy-MM-dd'T'"/>
+					<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일"/>
+				</p>
+				<hr>
 				<div class="main_image">
 			    	<c:forEach items="${board.attachList}" var="b">
 							<img alt="" src="${contextPath}/display?fileName=${b.imageName}" style="width: 230px;">
@@ -42,7 +50,6 @@
 				    <p>평균가격 : ${board.avgPrice}원 </p>
 				    <p>평균 배달시간 : ${board.avgDelivery} </p>
 				    <p>설명 : ${board.description} </p>
-				    <p>작성자 : ${board.writer} </p>
 			    </div>
 			</div>
 		</div> <br>

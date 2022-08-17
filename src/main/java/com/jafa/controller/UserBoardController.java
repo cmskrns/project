@@ -52,6 +52,7 @@ public class UserBoardController {
 	@Autowired
 	UserBoardMapper mapper;
 	
+	//리스트
 	@GetMapping("/list/{category}")
 	public String userboardList(@PathVariable String category,Criteria criteria,Model model) {
 		criteria.setCategory(category);
@@ -62,6 +63,7 @@ public class UserBoardController {
 		return "userboard/list";
 	}
 	
+	//단일게시물
 	@GetMapping("/get")
 	public String get(Long bno, Model model,
 			@CookieValue(required = false) Cookie viewCount, HttpServletRequest request, HttpServletResponse response) {
@@ -86,13 +88,14 @@ public class UserBoardController {
 		return "userboard/get";
 	}
 	
+	//수정
 	@GetMapping("/modify")
 	public String modifyForm(Long bno, UserBoard userBoard) {
 		UserBoard read = service.get(bno, false);
 		if(read == null) throw new NotFoundBoardException();
 		return "userboard/modify";
 	}
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("#userBoard.writer == principal.username")
 	@PostMapping("/modify")
 	public String modify(@Valid UserBoard userBoard,Errors errors ,RedirectAttributes rttr) {
 		if (errors.hasErrors()) {
@@ -103,13 +106,14 @@ public class UserBoardController {
 		return "redirect:list/"+ userBoard.getCategory();
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	//삭제
+	@PreAuthorize("#userBoard.writer == principal.username")
 	@PostMapping("/remove")
-	public String remove(Long bno, String category, RedirectAttributes rttr) {
-		List<UserBoardAttachVO> attachList = service.getAttachList(bno);
+	public String remove(UserBoard userBoard, String category, RedirectAttributes rttr) {
+		List<UserBoardAttachVO> attachList = service.getAttachList(userBoard.getBno());
 		deleteFiles(attachList);
 		rttr.addAttribute("category", category);
-		service.remove(bno);
+		service.remove(userBoard.getBno());
 		return "redirect:list/" + category;
 	}
 	
@@ -132,6 +136,7 @@ public class UserBoardController {
 		
 	}
 
+	//게시물 작성
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public String registerForm(UserBoard userBoard) {
@@ -146,7 +151,6 @@ public class UserBoardController {
 		}
 		rttr.addAttribute("category", userBoard.getCategory());
 		service.register(userBoard);
-//		rttr.addAttribute("board", userBoard); 이거 왜 넣었지??..
 		return "redirect:list/" + userBoard.getCategory();
 	}
 	

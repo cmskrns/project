@@ -59,7 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.exceptionHandling()
 			.accessDeniedHandler(customAccessDeniedHandler());
 		
-		http.csrf().ignoringAntMatchers("/uploadAjaxAction","/deleteFile","/resources/**");
+		http.csrf().ignoringAntMatchers("/uploadAjaxAction","/deleteFile","/resources/**",
+				"/userUploadAjaxAction","/deleteUserFile");
 	}
 
 	@Override

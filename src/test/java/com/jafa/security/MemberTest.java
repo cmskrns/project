@@ -52,13 +52,13 @@ public class MemberTest extends AppTest{
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "admin");
+			pstmt.setString(1, "member");
 			pstmt.setString(2, passwordEncoder.encode("1234"));
-			pstmt.setString(3, "관리자");
+			pstmt.setString(3, "회원");
 			pstmt.setString(4, "admin@naver.com");
 			pstmt.setString(5, "대구 북구");
-			pstmt.setString(6,"010-5156-5567");
-			pstmt.setString(7,"1996-03-09");
+			pstmt.setString(6,"010-1111-1111");
+			pstmt.setString(7,"1996-01-01");
 			pstmt.setString(8,"M");
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

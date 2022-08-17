@@ -170,7 +170,7 @@ $('.uploadResult ul').on('click','span',function(){
 	let targetLi =$(this).closest('li');
 	
 	$.ajax({
-		url :contextPath + "/deleteUserFile",
+		url :contextPath + "/deleteFile",
 		type : 'POST',
 		data : {fileName : targetFile, type : type},
 		dataType : 'text',

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class CommonExceptionHandler {
 
 	//400에러
-	@ExceptionHandler(value =  {TypeMismatchException.class,BindException.class})
+	@ExceptionHandler(value =  {TypeMismatchException.class,BindException.class,RuntimeException.class})
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	public String badRequestHanler() {
 		return "errorPage/_400";
@@ -26,4 +26,5 @@ public class CommonExceptionHandler {
 		model.addAttribute("url", exception.getRequestURL());
 		return "errorPage/_404";
 	}
+	
 }

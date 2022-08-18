@@ -54,6 +54,10 @@ public class BoardController {
 	public String boardList(@PathVariable String category, Criteria criteria, Model model) {
 		criteria.setCategory(category);
 		PageMaker pageMaker = new PageMaker(criteria, mapper.totalCount(criteria));
+		List<Board> list = service.getList(criteria);
+		if(list.isEmpty()) {
+			throw new RuntimeException();
+		}
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("category" ,criteria.getCategory());
 		model.addAttribute("pageMaker",pageMaker);

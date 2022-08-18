@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>방구석미식가</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -22,9 +22,9 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-light">
+<nav class="navbar navbar-expand-sm bg-White">
 	<div class="container">
-		<h3><a class="navbar-brand" href="${contextPath }"><img src="${contextPath}/resources/img/Free_Sample_By_Wix.jpg" style="width: 130px;"></a></h3>
+		<h3><a class="navbar-brand" href="${contextPath }"><img src="${contextPath}/resources/img/logo.jpg" style="width: 200px;"></a></h3>
   		<ul class="nav nav-pills">
 		    <li class="nav-item">
 				<a class="nav-link" href="${contextPath }/board/list/K-Food">한식</a>
@@ -36,14 +36,11 @@
 			    <a class="nav-link" href="${contextPath }/board/list/J-Food">일식</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">양식</a>
+				<a class="nav-link" href="${contextPath }/board/list/W-Food">양식</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">분식</a>
+				<a class="nav-link" href="${contextPath }/board/list/FD-Food">분식</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">기타</a>
-		  	</li>
 		    <li class="nav-item dropdown">
 			   	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">유저게시판</a>
 			    <div class="dropdown-menu">

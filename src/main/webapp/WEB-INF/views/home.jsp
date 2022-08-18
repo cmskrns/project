@@ -5,50 +5,104 @@
 	<h1>Gourmet in the Corner of the Room</h1>
 	<p>방구석 미식가들을 위한 커뮤니티</p>
 </div>
-
-<div class="container-fluid bg-3 text-center">    
-  <h3>오늘의 음식</h3><br>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>라면</p>
-      <img src="${contextPath}/resources/img/라면.jpg" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>비빔밥</p>
-      <img src="${contextPath}/resources/img/비빔밥.jpg" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>삼겹살</p>
-      <img src="${contextPath}/resources/img/삼겹살.jpg" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>피자</p>
-      <img src="${contextPath}/resources/img/피자.jpg" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
+<div class="container">
+	<div class="container-fluid bg-3 text-center">    
+		<h3>오늘의 음식</h3><br>
+		<div class="row todayMenu" ></div>
+	</div><br><hr><br>
+	<div class="container-fluid bg-3 text-center">
+		<h3>인기게시글</h3><br>  
+		<div class="row">
+			<div class="col-sm-6">
+				<table class="table table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col" class="text-center">카테고리</th>
+							<th scope="col" class="text-center">제목</th>
+							<th scope="col" class="text-center">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${board}" var="b">
+							<tr>
+								<td style="width: 10%" class="text-center">${b.category}</td>
+								<td style="width: 30%" class="text-center">
+									<a class="text-reset" href="${contextPath}/board/get?fno=${b.fno}">
+										${b.rtName}[${b.replyCnt}]
+									</a>
+								</td>
+								<td style="width: 10%" class="text-center">${b.viewCount}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+		    </div>
+		    <div class="col-sm-6"> 
+		    	<table class="table table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col" class="text-center">카테고리</th>
+							<th scope="col" class="text-center">제목</th>
+							<th scope="col" class="text-center">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${userBoard}" var="u">
+							<tr>
+								<td style="width: 10%" class="text-center">${u.category}</td>
+								<td style="width: 30%" class="text-center">
+									<a class="text-reset" href="${contextPath}/userboard/get?bno=${u.bno}">
+										${u.title}[${u.replyCnt}]
+									</a>
+								</td>
+								<td style="width: 10%" class="text-center">${u.viewCount}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+		    </div>
+		</div>
+	</div>
 </div><br>
-
-<div class="container-fluid bg-3 text-center">    
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br><br>
-
 <%@ include file="layout/footer.jsp" %>
-</body>
-</html>
+<script>
+$(function(){
+	let menu = [
+		 '라면.jpg', 
+		 '비빔밥.jpg', 
+		 '삼겹살.jpg', 
+		 '피자.jpg'	 
+	 ];
+	
+	/*
+	let url = "";
+	$.getJSON(url,function(result){
+		
+	}).fail(function(){
+		
+	});
+	*/
+	 
+	menu.sort(() => Math.random() - 0.5)
+	 
+	let menuDiv = ""; 
+	for(let i=0; i<4 ; i++){
+		menuDiv +='<div class="col-sm-3">' 
+		menuDiv +='<p>'+menu[i].slice(0,menu[i].length-4)+'</p>'
+		menuDiv += '<img src="${contextPath}/resources/img/'+ menu[i] +'"class="img-responsive" style="width: 250px, 140px;" alt="Image">'
+		menuDiv += '</div>'
+	}
+ 	$('.todayMenu').html(menuDiv);
+ 	
+ 	/*let listForm = $('#listForm');
+ 	$('.get').on('click',function(e){
+ 		e.preventDefault();
+ 		let bno = $(this).attr('href');
+ 		#('#bno').val(bno);
+ 		listForm.append($('#bno'));
+ 		listForm.attr("action","${contextPath}/userboard/get");
+		listForm.submit();
+ 	})*/
+})
+
+</script>

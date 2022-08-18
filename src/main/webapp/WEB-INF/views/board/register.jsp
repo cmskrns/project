@@ -21,17 +21,27 @@
 			<label for="exampleFormControlInput1">업종 : </label>
 			<div class="form-check-inline">
 	      		<label class="form-check-label" for="radio1">
-	        		<input type="radio" class="form-check-input" id="radio1" name="category"  value="K-Food" checked>K-Food
+	        		<input type="radio" class="form-check-input" id="radio1" name="category"  value="K-Food" checked>한식
 	       		</label>
 	    	</div>
 	    	<div class="form-check-inline">
 	      		<label class="form-check-label" for="radio2">
-	        		<input type="radio" class="form-check-input" id="radio2" name="category" value="C-Food" >C-Food
+	        		<input type="radio" class="form-check-input" id="radio2" name="category" value="C-Food" >일식
 	      		</label>
 	    	</div>
 	    	<div class="form-check-inline">
 	      		<label class="form-check-label" for="radio3">
-	       			<input type="radio" class="form-check-input" id="radio3" name="category" value="J-Food" >J-Food
+	       			<input type="radio" class="form-check-input" id="radio3" name="category" value="J-Food" >중식
+	      		</label>
+	    	</div>
+	    	<div class="form-check-inline">
+	      		<label class="form-check-label" for="radio3">
+	       			<input type="radio" class="form-check-input" id="radio3" name="category" value="W-Food" >양식
+	      		</label>
+	    	</div>
+	    	<div class="form-check-inline">
+	      		<label class="form-check-label" for="radio3">
+	       			<input type="radio" class="form-check-input" id="radio3" name="category" value="FD-Food" >분식
 	      		</label>
 	    	</div>
 		</div>

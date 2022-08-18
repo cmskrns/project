@@ -141,19 +141,23 @@ $(function() {
 	
 	$('#getForm .list').on('click',function(e){
 		e.preventDefault();
-		let categoryTag = $('input[name="category"]').clone();
-		let pageTag = $('input[name="page"]').clone();
-		let typeTag = $('input[name="type"]').clone();
-		let keywordTag = $('input[name="keyword"]').clone();
-		let category = categoryTag.val();
-
-		getForm.empty();
-		getForm.append(categoryTag);
-		getForm.append(pageTag);
-		getForm.append(typeTag);
-		getForm.append(keywordTag);
-		getForm.attr("action","list/"+category);
-		getForm.submit();
+		if ($('input[name="page"]').val()) {
+			let categoryTag = $('input[name="category"]').clone();
+			let pageTag = $('input[name="page"]').clone();
+			let typeTag = $('input[name="type"]').clone();
+			let keywordTag = $('input[name="keyword"]').clone();
+			let category = categoryTag.val();
+	
+			getForm.empty();
+			getForm.append(categoryTag);
+			getForm.append(pageTag);
+			getForm.append(typeTag);
+			getForm.append(keywordTag);
+			getForm.attr("action","list/"+category);
+			getForm.submit();
+		}else{
+			window.history.back();
+		}
 	})
 	$('#getForm .modify').on('click',function(e){
 		e.preventDefault();

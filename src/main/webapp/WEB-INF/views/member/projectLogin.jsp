@@ -5,9 +5,6 @@
 <div class="container">	
 	<div class="loginForm my-5">
 		<h2>로그인 페이지</h2>
-		<div class="error">
-			<p>${error}</p>
-		</div>
 		<form:form action="${contextPath}/member/projectLogin" method="post" modelAttribute="memberVO">
 			<div class="form-group">
 				<input type="text" name="loginId" id="loginId" value="${loginId }" placeholder="아이디" class="form-control">
@@ -15,12 +12,15 @@
 			<div class="form-group">
 				<input type="password" name="loginPw" id="loginPw" placeholder="비밀번호" class="form-control">
 			</div>
+			<c:if test="${not empty error}">
+				<div class="alert alert-danger">
+				${error}				
+			</div>
+			</c:if>
+			
 			<div class="form-group">
 				<label for="remember-me">Remember Me</label>
 				<input type="checkbox" name="remember-me" id="remember-me">
-			</div>
-			<div class="error_area">
-				${errorMessage}
 			</div>
 			<div class="form-group">
 				<button class="btn btn-primary form-control loginBtn">로그인</button>

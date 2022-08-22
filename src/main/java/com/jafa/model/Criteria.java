@@ -16,9 +16,10 @@ public class Criteria {
 	private String type;
 	private String keyword;
 	
+	//한페이지에 보일 게시물 숫자
 	public Criteria() {
 		this.page = 1;
-		this.perPageNum = 15;
+		this.perPageNum = 10;
 	}
 	
 	

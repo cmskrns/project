@@ -71,17 +71,10 @@ $(function(){
 		 '라면.jpg', 
 		 '비빔밥.jpg', 
 		 '삼겹살.jpg', 
-		 '피자.jpg'	 
+		 '피자.jpg',
+		 '떡볶이.jpg',
+		 '막창.jpg'
 	 ];
-	
-	/*
-	let url = "";
-	$.getJSON(url,function(result){
-		
-	}).fail(function(){
-		
-	});
-	*/
 	 
 	menu.sort(() => Math.random() - 0.5)
 	 
@@ -89,20 +82,11 @@ $(function(){
 	for(let i=0; i<4 ; i++){
 		menuDiv +='<div class="col-sm-3">' 
 		menuDiv +='<p>'+menu[i].slice(0,menu[i].length-4)+'</p>'
-		menuDiv += '<img src="${contextPath}/resources/img/'+ menu[i] +'"class="img-responsive" style="width: 250px, 140px;" alt="Image">'
+		menuDiv += '<img src="${contextPath}/resources/img/'+ menu[i] +'"class="img-responsive" style="width: 180px; height: 140px;" alt="Image">'
 		menuDiv += '</div>'
 	}
  	$('.todayMenu').html(menuDiv);
  	
- 	/*let listForm = $('#listForm');
- 	$('.get').on('click',function(e){
- 		e.preventDefault();
- 		let bno = $(this).attr('href');
- 		#('#bno').val(bno);
- 		listForm.append($('#bno'));
- 		listForm.attr("action","${contextPath}/userboard/get");
-		listForm.submit();
- 	})*/
 })
 
 </script>

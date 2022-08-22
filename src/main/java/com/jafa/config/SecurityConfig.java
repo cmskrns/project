@@ -18,6 +18,7 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.jafa.security.CustomAccessDeniedHandler;
+import com.jafa.security.CustomLoginFaiureHandler;
 import com.jafa.security.LoginSuccessHandler;
 import com.jafa.security.ProjectUserDetailsService;
 
@@ -46,7 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.passwordParameter("loginPw")
 				.loginPage("/member/projectLogin") // 로그인 화면 get 
 				.loginProcessingUrl("/member/projectLogin") // 로그인 처리 post
-				.successHandler(loginSuccessHandler());
+				.successHandler(loginSuccessHandler())
+				.failureHandler(customLoginFaiureHandler());
+				
 		
 		http.logout()
 			.logoutUrl("/member/projectLogout") // 로그아웃 처리 post
@@ -93,5 +96,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	public CustomAccessDeniedHandler customAccessDeniedHandler() {
 		return new CustomAccessDeniedHandler();
+	}
+	
+	@Bean
+	public CustomLoginFaiureHandler customLoginFaiureHandler() {
+		return new CustomLoginFaiureHandler();
 	}
 }

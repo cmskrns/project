@@ -13,7 +13,11 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script>let contextPath = "${contextPath}"</script>
+<script>
+	let contextPath = "${contextPath}"
+	let csrfHeaderName = "${_csrf.headerName}"
+	let csrfTokenValue = "${_csrf.token}"
+</script>
 <script src="${contextPath}/resources/js/reply.js"></script>
 <script src="${contextPath}/resources/js/userReply.js"></script>
 <sec:authorize access="isAuthenticated()">

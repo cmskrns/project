@@ -10,6 +10,9 @@ let userReplyService = (function(){
 			url : contextPath+'/userReplies/new',
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			} ,
 			success : function(result, status, xhr){
 				if(callback){
 					callback(result);
@@ -44,6 +47,9 @@ let userReplyService = (function(){
 		$.ajax({
 			type : 'delete',
 			url : contextPath + '/userReplies/'+ bno,
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			} ,
 			success : function(result, status, xhr){
 				if(callback){
 					callback(result);
@@ -64,6 +70,9 @@ let userReplyService = (function(){
 			url : contextPath + '/userReplies/'+ reply.rno,
 			contentType : "application/json; charset=utf-8",
 			data : JSON.stringify(reply),
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			} ,
 			success : function(result, status, xhr){
 				if(callback){
 					callback(result);

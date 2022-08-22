@@ -5,8 +5,24 @@
 <div class="container">
 	<div>
 		<div>
-			<h2>${category}게시판</h2>
-			<p>칠곡 안에 한식을 배달해주는 음식점들을 모아놨습니다</p>
+			<h2>
+				<c:if test="${category eq 'K-Food'}">
+					한식게시판
+				</c:if>
+				<c:if test="${category eq 'C-Food'}">
+					중식게시판
+				</c:if>
+				<c:if test="${category eq 'J-Food'}">
+					일식게시판
+				</c:if>
+				<c:if test="${category eq 'W-Food'}">
+					양식게시판
+				</c:if>
+				<c:if test="${category eq 'FD-Food'}">
+					분식게시판
+				</c:if>
+			</h2>
+			<p>칠곡 안의 배달 음식점들을 모아놨습니다</p>
 		</div>
 	</div>
 	<!-- 검색창 -->
@@ -57,7 +73,7 @@
 						<td style="width: 8%" class="text-center">${b.fno}</td>
 						<td style="width: 37%">
 							<a class="text-reset get" href="${b.fno}">
-								<img alt="" src="${contextPath}/display?fileName=${b.attachList[0].imageName}" style="width: 50px;">
+								<img alt="" src="${contextPath}/display?fileName=${b.attachList[0].imageName}" style="width: 40px;">
 								${b.rtName}[${b.replyCnt}]
 							</a>
 						</td>

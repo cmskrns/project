@@ -65,7 +65,7 @@ showList(1);
 				fno : fnoValue
 		}
 		replyService.add(reply,function(result){
-			alert(result)
+			alert(result);
 			replyTag.find('input[name="reply"]').val('');
 			showList(1);
 		})

@@ -30,7 +30,10 @@
 				    <p>전화번호 : ${member.phoneNumber} </p>
 				    <p>생년월일 : ${member.natalDay} </p>
 				    <p>성별 : ${member.gender} </p>
-				    <p>회원가입날짜 : ${member.regDate} </p>
+				    <p>회원가입날짜 :
+				    		<fmt:parseDate var="regDate" value="${member.regDate }" pattern="yyyy-MM-dd'T'"/>
+							<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일"/> 
+					</p>
 			    </div>
 			</div>
 		</div><br>

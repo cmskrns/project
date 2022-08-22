@@ -4,7 +4,17 @@
 <div class="container">
 	<div>
 		<div>
-			<h2>${category}게시판</h2>
+			<h2>
+				<c:if test="${category eq 'Free'}">
+					자유게시판
+				</c:if>
+				<c:if test="${category eq 'Tip'}">
+					팁게시판
+				</c:if>
+				<c:if test="${category eq 'Recommend'}">
+					추천합니다
+				</c:if>
+			</h2>
 			<p>여러분의 다양한 이야기를 들려주세요</p>
 		</div>
 	</div>

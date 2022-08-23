@@ -25,7 +25,23 @@
 					<tbody>
 						<c:forEach items="${board}" var="b">
 							<tr>
-								<td style="width: 10%" class="text-center">${b.category}</td>
+								<td style="width: 10%" class="text-center">
+									<c:if test="${b.category eq 'K-Food'}">
+										한식
+									</c:if>
+									<c:if test="${b.category eq 'C-Food'}">
+										중식
+									</c:if>
+									<c:if test="${b.category eq 'J-Food'}">
+										일식
+									</c:if>
+									<c:if test="${b.category eq 'W-Food'}">
+										양식
+									</c:if>
+									<c:if test="${b.category eq 'FD-Food'}">
+										분식
+									</c:if>
+								</td>
 								<td style="width: 30%" class="text-center">
 									<a class="text-reset" href="${contextPath}/board/get?fno=${b.fno}">
 										${b.rtName}[${b.replyCnt}]
@@ -49,7 +65,17 @@
 					<tbody>
 						<c:forEach items="${userBoard}" var="u">
 							<tr>
-								<td style="width: 10%" class="text-center">${u.category}</td>
+								<td style="width: 10%" class="text-center">
+									<c:if test="${u.category eq 'Free'}">
+										자유게시판
+									</c:if>
+									<c:if test="${u.category eq 'Tip'}">
+										팁게시판
+									</c:if>
+									<c:if test="${u.category eq 'Recommend'}">
+										추천합니다
+									</c:if>
+								</td>
 								<td style="width: 30%" class="text-center">
 									<a class="text-reset" href="${contextPath}/userboard/get?bno=${u.bno}">
 										${u.title}[${u.replyCnt}]

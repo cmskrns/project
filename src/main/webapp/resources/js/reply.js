@@ -15,7 +15,7 @@ let replyService = (function(){
 			} ,
 			success : function(result, status, xhr){
 				if(callback){
-					callback(result);
+					callback('댓글이 등록되었습니다');
 				}
 			},
 			error : function(xhr, status, er){
@@ -52,7 +52,7 @@ let replyService = (function(){
 			} ,
 			success : function(result, status, xhr){
 				if(callback){
-					callback(result);
+					callback('댓글이 삭제되었습니다');
 				}
 			},
 			error : function(xhr,status,er){

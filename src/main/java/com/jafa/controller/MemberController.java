@@ -89,7 +89,7 @@ public class MemberController {
 	}
 	
 	//회원탈퇴
-	@PreAuthorize("userId == principal.username")
+	@PreAuthorize("#userId == principal.username")
 	@PostMapping("/memberRemove")
 	public String memberRemove(String userId, HttpServletRequest request,HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();

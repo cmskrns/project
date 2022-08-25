@@ -90,6 +90,7 @@
 $(function(){
 	let logoutForm = $('#logoutForm')
 	$('#logoutForm a').on('click',function(e){
+		alert("로그아웃 되었습니다")
 		logoutForm.attr("action","${contextPath}/member/projectLogout");
 		logoutForm.submit();
 	})

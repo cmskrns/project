@@ -54,8 +54,9 @@ $(function(){
 	})
 	$('#memberForm .remove').on('click',function(e){
 		e.preventDefault();
+		alert("회원 탈퇴하셨습니다")
 		memberForm.attr("method","post");
-		memberForm.attr("action","${contextPath}/member/memberRemove")
+		memberForm.attr("action","${contextPath}/member/memberRemove");
 		memberForm.submit();
 	})
 })

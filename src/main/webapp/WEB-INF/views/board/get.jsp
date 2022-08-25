@@ -170,6 +170,7 @@ $(function() {
 			alert("댓글이 존재합니다")
 			
 		}else {
+			alert("삭제되었습니다.")
 			getForm.attr("method","post");
 			getForm.attr("action","remove");
 			getForm.submit();

@@ -101,7 +101,6 @@ public class MemberController {
 				response.addCookie(cookies[i]);
 			}
 		}
-		
 		return "redirect:/";
 	}
 	

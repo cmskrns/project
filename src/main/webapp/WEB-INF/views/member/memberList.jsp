@@ -47,38 +47,38 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${list}" var="b">
-					<tr>
-						<td style="width: 10%" class="text-center">${b.userId}</td>
-						<td style="width: 9%" class="text-center">${b.userName}</td>
-						<td style="width: 13%" class="text-center">${b.userEmail}</td>
-						<td style="width: 12%" class="text-center">${b.addr}</td>
-						<td style="width: 12%" class="text-center">${b.phoneNumber}</td>
-						<td style="width: 15%" class="text-center">
-							<fmt:parseDate var="natalDay" value="${b.natalDay }" pattern="yyyy-MM-dd"/>
-							<fmt:formatDate value="${natalDay}" pattern="yyyy년MM월dd일"/>
-						</td>
-						<td style="width: 6%" class="text-center">${b.gender}</td>
-						<td style="width: 15%" class="text-center">
-							<fmt:parseDate var="regDate" value="${b.regDate }" pattern="yyyy-MM-dd'T'"/>
-							<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일"/>
-						</td>
-						<td style="width: 8%">
-							<c:choose>
-								<c:when test="${b.userId == 'admin'}">
-									<a class="btn btn-secondary">불가</a>
-								</c:when>
-								<c:otherwise>
-									<form id="memberRemove">
-										<a class="btn btn-outline-danger">강퇴</a>
-										<input type="hidden" name="userId" value="${b.userId}">
-										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-									</form>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-				</c:forEach>
+					<c:forEach items="${list}" var="b">
+						<tr>
+							<td style="width: 10%" class="text-center">${b.userId}</td>
+							<td style="width: 9%" class="text-center">${b.userName}</td>
+							<td style="width: 13%" class="text-center">${b.userEmail}</td>
+							<td style="width: 12%" class="text-center">${b.addr}</td>
+							<td style="width: 12%" class="text-center">${b.phoneNumber}</td>
+							<td style="width: 15%" class="text-center">
+								<fmt:parseDate var="natalDay" value="${b.natalDay }" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate value="${natalDay}" pattern="yyyy년MM월dd일"/>
+							</td>
+							<td style="width: 6%" class="text-center">${b.gender}</td>
+							<td style="width: 15%" class="text-center">
+								<fmt:parseDate var="regDate" value="${b.regDate }" pattern="yyyy-MM-dd'T'"/>
+								<fmt:formatDate value="${regDate}" pattern="yyyy년MM월dd일"/>
+							</td>
+							<td style="width: 8%">
+								<c:choose>
+									<c:when test="${b.userId == 'admin'}">
+										<a class="btn btn-secondary">불가</a>
+									</c:when>
+									<c:otherwise>
+										<form id="memberRemove">
+											<a class="btn btn-outline-danger">강퇴</a>
+											<input type="hidden" class="userId" value="${b.userId}">
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+										</form>
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -98,7 +98,7 @@
 		</c:if>
 	</div>
 	<div class="listData">
-		<input type="hidden" name="userId" id="userId" value="">
+		
 		<input type="hidden" name="page" id="page" value="${pageMaker.criteria.page}">
 		<input type="hidden" name="type" id="type" value="${pageMaker.criteria.type}">
 		<input type="hidden" name="keyword" id="keyword" value="${pageMaker.criteria.keyword}">
@@ -121,8 +121,11 @@ $(function(){
 	});
 	
 	$('#memberRemove a').on('click',function(e){
+		e.preventDefault();
+		let userId = $(this).next().val();
 		memberRemove.attr("method","post");
 		memberRemove.attr("action","${contextPath}/member/adminRemove");
+		memberRemove.append('<input type="hidden" name="userId" value="'+userId+'">');
 		memberRemove.submit();
 	})
 	

@@ -84,6 +84,7 @@ public class MemberController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping("/adminRemove")
 	public String adminRemove(String userId) {
+		System.out.println("삭제 할 유저아이디" + userId);
 		service.remove(userId);
 		return "redirect:memberList";
 	}
